@@ -1,8 +1,8 @@
 import { shallowMount } from "@vue/test-utils";
-import Home from "@/views/Home.vue";
+import RotateText from "@/components/RotateText.vue";
 
-describe("Home.vue", () => {
-  const wrapper = shallowMount(Home, {
+describe("RotateText.vue", () => {
+  const wrapper = shallowMount(RotateText, {
     data() {
       return {
         inputText: "ABLY Externship",
