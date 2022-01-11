@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import Modal from "@/components/Modal.vue";
+import Modal from '@/components/Modal.vue';
 
 export default {
-  name: "RotateText",
+  name: 'RotateText',
 
   components: {
     Modal,
@@ -31,7 +31,7 @@ export default {
 
   data() {
     return {
-      inputText: "",
+      inputText: '',
       isModalShown: false,
       clicks: 0,
     };

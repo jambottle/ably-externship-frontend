@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
-import RotateText from "@/components/RotateText.vue";
+import HelloWorld from '@/components/HelloWorld.vue';
+import RotateText from '@/components/RotateText.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
 
   components: {
     HelloWorld,
