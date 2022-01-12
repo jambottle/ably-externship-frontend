@@ -1,42 +1,49 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import RotateText from '@/components/RotateText.vue';
 
 describe('RotateText.vue', () => {
-  const wrapper = shallowMount(RotateText);
+  const wrapper = mount(RotateText);
 
-  it('Input에 값을 입력하면, Input에 입력한 값이 그 아래에 똑같이 표시된다.', () => {
-    const inputText = wrapper.find('#input');
-    const outputText = wrapper.find('#output');
-
-    expect(inputText.text()).toBe(outputText.text());
+  // 1주차 미션 (기본): 간단한 문자열 회전 기능 구현해보기
+  it('renders text-type input', () => {
+    expect(wrapper.get('input[type="text"]').exists()).toBe(true);
   });
 
-  it("'제출'을 1회 누르면, Input에 입력한 값과 아래에 표시된 문자열이 왼쪽으로 1칸씩 회전한다.", async () => {
-    const inputText = wrapper.find('#input');
-    const outputText = wrapper.find('#output');
-    const rotateButton = wrapper.find('#rotate');
-
-    await inputText.setValue('ABLY Externship');
-    await rotateButton.trigger('click');
-
-    expect(outputText.text()).toBe('BLY ExternshipA');
+  it('renders submit-type button', () => {
+    expect(wrapper.get('button[type="submit"]').exists()).toBe(true);
   });
 
-  it("'알림'을 누를 때마다 Input에 입력한 값과 '알림' 버튼을 클릭한 횟수가 알림창에 표시된다.", async () => {
-    const inputText = wrapper.find('#input');
-    const outputText = wrapper.find('#output');
-    const rotateButton = wrapper.find('#rotate');
-    const modalButton = wrapper.find('#modal');
+  it('has paragraph element', () => {
+    expect(wrapper.get('p[data-test="output"]').exists()).toBe(true);
+  });
 
-    await inputText.setValue('ABLY Externship');
-    await rotateButton.trigger('click');
-    await rotateButton.trigger('click');
-    await modalButton.trigger('click');
-    await modalButton.trigger('click');
-    await modalButton.trigger('click');
+  it('displays text from text-type input', async () => {
+    const testText = 'Hello from test code!';
 
-    expect(outputText.text()).toBe('LY ExternshipAB');
-    expect(wrapper.vm.isModalShown).toBeTruthy();
-    expect(wrapper.vm.clicks).toBe(3);
+    await wrapper.get('input[data-test="input"]').setValue(testText);
+
+    expect(wrapper.get('p[data-test="output"]').text()).toEqual(testText);
+  });
+
+  it('rotates text to left one at a time per button click', async () => {
+    const testText = 'I am rotating!';
+    const resultText = ' am rotating!I'.trim();
+
+    await wrapper.get('input[data-test="input"]').setValue(testText);
+    await wrapper.get('button[data-test="rotate"]').trigger('click');
+
+    expect(wrapper.get('p[data-test="output"]').text()).toBe(resultText);
+  });
+
+  // 1주차 미션 (심화): 입력된 문자열과 버튼 클릭 횟수를 알림창에 띄우기
+  it('shows modal with text and click counter', async () => {
+    const testText = 'Text shown on modal!';
+
+    await wrapper.get('input[data-test="input"]').setValue(testText);
+    await wrapper.get('button[data-test="click"]').trigger('click');
+    await wrapper.get('button[data-test="click"]').trigger('click');
+
+    expect(wrapper.get('div[class="modal-body"]').text()).toContain(testText);
+    expect(wrapper.get('div[class="modal-body"]').text()).toContain(2);
   });
 });

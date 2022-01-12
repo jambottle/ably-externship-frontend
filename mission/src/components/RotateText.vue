@@ -1,9 +1,9 @@
 <template>
   <!-- 1주차 미션 (기본): 간단한 문자열 회전 기능 구현해보기 -->
-  <input id="input" type="text" v-model="inputText" />
-  <button id="rotate" @click="rotateText">제출</button>
-  <button id="modal" @click="showModal">알림</button>
-  <p id="output">{{ inputText }}</p>
+  <input type="text" v-model="inputText" data-test="input" />
+  <button type="submit" @click="rotateText" data-test="rotate">제출</button>
+  <button type="submit" @click="showModal" data-test="click">알림</button>
+  <p data-test="output">{{ inputText }}</p>
 
   <!-- 1주차 미션 (심화): 입력된 문자열과 버튼 클릭 횟수를 알림창에 띄우기 -->
   <transition name="modal">
