@@ -56,7 +56,6 @@ export default {
 .modal-leave-active {
   transition: opacity 0.5s ease;
 }
-
 .modal-enter-from,
 .modal-leave-to {
   opacity: 0;
