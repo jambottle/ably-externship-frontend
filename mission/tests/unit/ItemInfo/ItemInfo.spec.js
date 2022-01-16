@@ -37,4 +37,24 @@ describe('ItemInfo.vue', () => {
     expect(wrapper.get('footer[data-test="footer-wrapper"]').exists()).toBe(true);
     expect(wrapper.get('button[data-test="footer-button"]').exists()).toBe(true);
   });
+
+  it('fills color of empty star tag', async () => {
+    await wrapper.setData({
+      itemLiked: false,
+    });
+    await wrapper.get('div[data-test="shop-startag"]').trigger('click');
+
+    expect(wrapper.get('svg[data-test="star-colored"]').isVisible()).toBe(true);
+  });
+
+  it('shows modal with name and discount price of item', async () => {
+    await wrapper.setData({
+      itemName: '삼선 슬리퍼',
+      itemPrice: { discount: 3000 },
+    });
+    await wrapper.get('button[data-test="footer-button"]').trigger('click');
+
+    expect(wrapper.get('div[class="modal-body"]').text()).toContain('삼선 슬리퍼');
+    expect(wrapper.get('div[class="modal-body"]').text()).toContain('3,000원');
+  });
 });

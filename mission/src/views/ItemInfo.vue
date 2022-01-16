@@ -23,8 +23,13 @@
           class="shop-startag"
           :class="itemLiked ? 'active' : ''"
           @click="toggleLike"
+          data-test="shop-startag"
         >
-          <FontAwesomeIcon v-if="itemLiked" :icon="icon.like" />
+          <FontAwesomeIcon
+            v-if="itemLiked"
+            :icon="icon.like"
+            data-test="star-colored"
+          />
           <FontAwesomeIcon v-else :icon="icon.unlike" />
         </div>
       </figcaption>
