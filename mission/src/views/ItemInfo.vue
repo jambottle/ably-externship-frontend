@@ -64,12 +64,25 @@
     <footer class="item-info-footer" data-test="footer-wrapper">
       <button
         class="w3-round-large w3-black w3-xlarge w3-padding-small"
+        @click="showModal"
         data-test="footer-button"
       >
         <strong>{{ itemPrice.discount.toLocaleString() }}</strong
         >원 구매
       </button>
     </footer>
+
+    <transition name="modal">
+      <Modal v-if="isModalShown" @close="isModalShown = false">
+        <template v-slot:header>
+          <h6>상품이 장바구니에 담겼습니다!</h6>
+        </template>
+        <template v-slot:body>
+          <p><b>상품명:</b> {{ itemName }}</p>
+          <p><b>가격:</b> {{ itemPrice.discount.toLocaleString() }}원</p>
+        </template>
+      </Modal>
+    </transition>
   </main>
 </template>
 
@@ -79,12 +92,14 @@ import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import itemData from '@/assets/itemData';
 import reviewData from '@/assets/reviewData';
+import Modal from '@/components/Modal.vue';
 
 export default {
   name: 'ItemInfo',
 
   components: {
     FontAwesomeIcon,
+    Modal,
   },
 
   data() {
@@ -95,6 +110,7 @@ export default {
         like: fasStar,
         unlike: farStar,
       },
+      isModalShown: false,
     };
   },
 
@@ -107,6 +123,9 @@ export default {
   methods: {
     toggleLike() {
       this.itemLiked = !this.itemLiked;
+    },
+    showModal() {
+      this.isModalShown = true;
     },
   },
 };
@@ -171,95 +190,104 @@ export default {
       }
     }
   }
-}
 
-.item-info-body {
-  margin-bottom: 84px;
-  padding: 6px 16px 0;
-  text-align: left;
+  .item-info-body {
+    margin-bottom: 84px;
+    padding: 6px 16px 0;
+    text-align: left;
 
-  h4 {
-    margin-top: 32px;
-  }
+    p {
+      font-size: 18px;
 
-  p {
-    font-size: 18px;
-
-    b {
-      color: red;
-      font-size: 21px;
-      font-weight: bold;
-    }
-
-    span {
-      color: black;
-      font-size: 21px;
-    }
-
-    del {
-      color: gray;
-      font-size: 16px;
-    }
-  }
-
-  #review {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-
-    .review-post {
-      width: 64%;
-      font-size: 16px;
-
-      span {
-        margin-left: 8px;
-        color: gray;
-        font-size: 15px;
-        vertical-align: top;
-      }
-
-      h6 {
-        margin: 2px 0;
-        font-size: 18px;
+      b {
+        color: red;
+        font-size: 21px;
         font-weight: bold;
       }
 
-      p {
+      span {
+        color: black;
+        font-size: 21px;
+      }
+
+      del {
+        color: gray;
         font-size: 16px;
       }
     }
 
-    .review-photo {
-      width: 120px;
-      height: 120px;
-      border: 1px solid lightgray;
-      background-position: center;
-      background-size: cover;
+    h4 {
+      margin-top: 32px;
+    }
+
+    #review {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+
+      .review-post {
+        width: 64%;
+        font-size: 16px;
+
+        span {
+          margin-left: 8px;
+          color: gray;
+          font-size: 15px;
+          vertical-align: top;
+        }
+
+        h6 {
+          margin: 2px 0;
+          font-size: 18px;
+          font-weight: bold;
+        }
+
+        p {
+          font-size: 16px;
+        }
+      }
+
+      .review-photo {
+        width: 120px;
+        height: 120px;
+        border: 1px solid lightgray;
+        background-position: center;
+        background-size: cover;
+      }
     }
   }
-}
 
-.item-info-footer {
-  position: fixed;
-  z-index: 5;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  width: 100%;
-  max-width: 512px;
-  border-top: 1px solid lightgray;
-  background: white;
+  .item-info-footer {
+    position: fixed;
+    z-index: 5;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+    max-width: 512px;
+    border-top: 1px solid lightgray;
+    background: white;
 
-  button {
-    display: block;
-    margin: 8px auto;
-    border: 0;
-    box-shadow: 4px 4px lightgray;
-    cursor: pointer;
+    button {
+      display: block;
+      margin: 8px auto;
+      border: 0;
+      box-shadow: 4px 4px lightgray;
+      cursor: pointer;
 
-    strong {
-      font-weight: bold;
+      strong {
+        font-weight: bold;
+      }
     }
+  }
+
+  .modal-enter-active,
+  .modal-leave-active {
+    transition: opacity 0.5s ease;
+  }
+  .modal-enter-from,
+  .modal-leave-to {
+    opacity: 0;
   }
 }
 </style>
