@@ -19,7 +19,14 @@
             #{{ tag }}&nbsp;
           </span>
         </div>
-        <span class="shop-startag">☆</span>
+        <div
+          class="shop-startag"
+          :class="itemLiked ? 'active' : ''"
+          @click="toggleLike"
+        >
+          <FontAwesomeIcon v-if="itemLiked" :icon="icon.like" />
+          <FontAwesomeIcon v-else :icon="icon.unlike" />
+        </div>
       </figcaption>
     </figure>
 
@@ -67,22 +74,39 @@
 </template>
 
 <script>
-import itemData from '../assets/itemData';
-import reviewData from '../assets/reviewData';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import itemData from '@/assets/itemData';
+import reviewData from '@/assets/reviewData';
 
 export default {
   name: 'ItemInfo',
+
+  components: {
+    FontAwesomeIcon,
+  },
 
   data() {
     return {
       ...itemData,
       reviews: reviewData,
+      icon: {
+        like: fasStar,
+        unlike: farStar,
+      },
     };
   },
 
   computed: {
     discountRate() {
       return 100 - (this.itemPrice.discount / this.itemPrice.original) * 100;
+    },
+  },
+
+  methods: {
+    toggleLike() {
+      this.itemLiked = !this.itemLiked;
     },
   },
 };
@@ -136,8 +160,14 @@ export default {
       }
 
       .shop-startag {
-        font-size: 32px;
+        font-size: 24px;
+        opacity: 0.4;
         cursor: pointer;
+
+        &.active {
+          color: red;
+          opacity: 1;
+        }
       }
     }
   }
