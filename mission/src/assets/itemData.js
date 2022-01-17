@@ -14,4 +14,5 @@ export default {
     discount: 198000,
   },
   itemLiked: false,
+  shopLiked: false,
 };

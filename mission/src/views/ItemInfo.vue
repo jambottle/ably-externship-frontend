@@ -20,17 +20,17 @@
           </span>
         </div>
         <div
-          class="shop-startag"
-          :class="itemLiked ? 'active' : ''"
+          class="shop-liketag"
+          :class="shopLiked ? 'active' : ''"
           @click="toggleLike"
-          data-test="shop-startag"
+          data-test="shop-liketag"
         >
           <FontAwesomeIcon
-            v-if="itemLiked"
-            :icon="icon.like"
-            data-test="star-colored"
+            v-if="shopLiked"
+            :icon="icon.liked"
+            data-test="like-clicked"
           />
-          <FontAwesomeIcon v-else :icon="icon.unlike" />
+          <FontAwesomeIcon v-else :icon="icon.unliked" />
         </div>
       </figcaption>
     </figure>
@@ -55,7 +55,7 @@
       <h4>상품정보</h4>
       <p v-html="itemDesc" data-test="item-desc" />
 
-      <h4>리뷰</h4>
+      <h4>리뷰 ({{ reviews.length }})</h4>
       <article id="review" v-for="review in reviews" :key="review.id">
         <div class="review-post">
           <b data-test="review-name">{{ review.userName }}</b>
@@ -98,8 +98,8 @@
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import itemData from '@/assets/itemData';
 import reviewData from '@/assets/reviewData';
 import Modal from '@/components/Modal.vue';
@@ -117,8 +117,8 @@ export default {
       ...itemData,
       reviews: reviewData,
       icon: {
-        like: fasStar,
-        unlike: farStar,
+        liked: fasHeart,
+        unliked: farHeart,
       },
       isModalShown: false,
     };
@@ -132,7 +132,7 @@ export default {
 
   methods: {
     toggleLike() {
-      this.itemLiked = !this.itemLiked;
+      this.shopLiked = !this.shopLiked;
     },
     showModal() {
       this.isModalShown = true;
@@ -188,8 +188,9 @@ export default {
         }
       }
 
-      .shop-startag {
-        font-size: 24px;
+      .shop-liketag {
+        margin-right: 2px;
+        font-size: 28px;
         opacity: 0.4;
         cursor: pointer;
 

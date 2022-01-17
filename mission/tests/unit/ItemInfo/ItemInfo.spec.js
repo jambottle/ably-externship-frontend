@@ -42,9 +42,9 @@ describe('ItemInfo.vue', () => {
     await wrapper.setData({
       itemLiked: false,
     });
-    await wrapper.get('div[data-test="shop-startag"]').trigger('click');
+    await wrapper.get('div[data-test="shop-liketag"]').trigger('click');
 
-    expect(wrapper.get('svg[data-test="star-colored"]').isVisible()).toBe(true);
+    expect(wrapper.get('svg[data-test="like-clicked"]').isVisible()).toBe(true);
   });
 
   it('shows modal with name and discount price of item', async () => {
