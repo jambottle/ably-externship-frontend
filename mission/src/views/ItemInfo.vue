@@ -37,7 +37,7 @@
 
     <section class="item-info-body">
       <h2 data-test="item-name">{{ itemName }}</h2>
-      <p>
+      <p v-if="itemPrice.discount !== itemPrice.original">
         <b data-test="discount-rate"> {{ Math.round(discountRate) }}% </b>
         <span data-test="discount-price">
           {{ itemPrice.discount.toLocaleString() }}원
@@ -45,6 +45,11 @@
         <del data-test="original-price">
           {{ itemPrice.original.toLocaleString() }}원
         </del>
+      </p>
+      <p v-else>
+        <span data-test="original-price">
+          {{ itemPrice.original.toLocaleString() }}원
+        </span>
       </p>
 
       <h4>상품정보</h4>
@@ -213,9 +218,11 @@ export default {
       span {
         color: black;
         font-size: 21px;
+        font-weight: bold;
       }
 
       del {
+        margin-left: 2px;
         color: gray;
         font-size: 16px;
       }
