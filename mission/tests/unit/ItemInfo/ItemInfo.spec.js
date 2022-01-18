@@ -38,19 +38,21 @@ describe('ItemInfo.vue', () => {
     expect(wrapper.get('button[data-test="footer-button"]').exists()).toBe(true);
   });
 
-  it('fills color of empty star tag', async () => {
+  it('fills empty like tag of shop by click event', async () => {
     await wrapper.setData({
-      itemLiked: false,
+      shop: { isLiked: false },
     });
     await wrapper.get('div[data-test="shop-liketag"]').trigger('click');
 
     expect(wrapper.get('svg[data-test="like-clicked"]').isVisible()).toBe(true);
   });
 
-  it('shows modal with name and discount price of item', async () => {
+  it('shows modal with name and price of item by click event', async () => {
     await wrapper.setData({
-      itemName: '삼선 슬리퍼',
-      itemPrice: { discount: 3000 },
+      item: {
+        name: '삼선 슬리퍼',
+        price: { discount: 3000 },
+      },
     });
     await wrapper.get('button[data-test="footer-button"]').trigger('click');
 

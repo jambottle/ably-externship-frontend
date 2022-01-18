@@ -4,29 +4,33 @@
       <div
         class="item-profile"
         data-test="item-profile"
-        :style="`background-image: url(${itemProfile})`"
+        :style="`background-image: url(${item.profile})`"
       />
       <figcaption id="shop">
         <div
           class="shop-profile"
           data-test="shop-profile"
-          :style="`background-image: url(${shopProfile})`"
+          :style="`background-image: url(${shop.profile})`"
         />
         <div class="shop-caption">
-          <b data-test="shop-name">{{ shopName }}</b>
+          <b data-test="shop-name">{{ shop.name }}</b>
           <br />
-          <span v-for="tag in shopTags" :key="tag" data-test="shop-tags">
+          <span
+            v-for="(tag, index) in shop.tags"
+            :key="index"
+            data-test="shop-tags"
+          >
             #{{ tag }}&nbsp;
           </span>
         </div>
         <div
           class="shop-liketag"
-          :class="shopLiked ? 'active' : ''"
+          :class="shop.isLiked ? 'active' : ''"
           @click="toggleLike"
           data-test="shop-liketag"
         >
           <FontAwesomeIcon
-            v-if="shopLiked"
+            v-if="shop.isLiked"
             :icon="icon.liked"
             data-test="like-clicked"
           />
@@ -36,24 +40,18 @@
     </figure>
 
     <section class="item-info-body">
-      <h2 data-test="item-name">{{ itemName }}</h2>
-      <p v-if="itemPrice.discount !== itemPrice.original">
-        <b data-test="discount-rate"> {{ Math.round(discountRate) }}% </b>
-        <span data-test="discount-price">
-          {{ itemPrice.discount.toLocaleString() }}원
-        </span>
-        <del data-test="original-price">
-          {{ itemPrice.original.toLocaleString() }}원
-        </del>
+      <h2 data-test="item-name">{{ item.name }}</h2>
+      <p v-if="item.price.discount !== item.price.original">
+        <b data-test="discount-rate"> {{ discountRate }}% </b>
+        <span data-test="discount-price"> {{ discountPrice }}원 </span>
+        <del data-test="original-price"> {{ originalPrice }}원 </del>
       </p>
       <p v-else>
-        <span data-test="original-price">
-          {{ itemPrice.original.toLocaleString() }}원
-        </span>
+        <span data-test="original-price"> {{ originalPrice }}원 </span>
       </p>
 
       <h4>상품정보</h4>
-      <p v-html="itemDesc" data-test="item-desc" />
+      <p v-html="item.desc" data-test="item-desc" />
 
       <h4>리뷰 ({{ reviews.length }})</h4>
       <article id="review" v-for="review in reviews" :key="review.id">
@@ -77,7 +75,7 @@
         @click="showModal"
         data-test="footer-button"
       >
-        <strong>{{ itemPrice.discount.toLocaleString() }}</strong
+        <strong>{{ discountPrice }}</strong
         >원 구매
       </button>
     </footer>
@@ -88,8 +86,8 @@
           <h6>상품이 장바구니에 담겼습니다!</h6>
         </template>
         <template v-slot:body>
-          <p><b>상품명:</b> {{ itemName }}</p>
-          <p><b>가격:</b> {{ itemPrice.discount.toLocaleString() }}원</p>
+          <p><b>상품명:</b> {{ item.name }}</p>
+          <p><b>가격:</b> {{ discountPrice }}원</p>
         </template>
       </Modal>
     </transition>
@@ -126,13 +124,20 @@ export default {
 
   computed: {
     discountRate() {
-      return 100 - (this.itemPrice.discount / this.itemPrice.original) * 100;
+      const rate = 1 - this.item.price.discount / this.item.price.original;
+      return Math.round(rate * 100);
+    },
+    discountPrice() {
+      return this.item.price.discount.toLocaleString();
+    },
+    originalPrice() {
+      return this.item.price.original.toLocaleString();
     },
   },
 
   methods: {
     toggleLike() {
-      this.shopLiked = !this.shopLiked;
+      this.shop.isLiked = !this.shop.isLiked;
     },
     showModal() {
       this.isModalShown = true;
