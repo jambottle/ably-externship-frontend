@@ -6,44 +6,14 @@
         data-test="item-profile"
         :style="`background-image: url(${item.profile})`"
       />
-      <figcaption id="shop">
-        <div
-          class="shop-profile"
-          data-test="shop-profile"
-          :style="`background-image: url(${shop.profile})`"
-        />
-        <div class="shop-caption">
-          <b data-test="shop-name">{{ shop.name }}</b>
-          <br />
-          <span
-            v-for="(tag, index) in shop.tags"
-            :key="index"
-            data-test="shop-tags"
-          >
-            #{{ tag }}&nbsp;
-          </span>
-        </div>
-        <div
-          class="shop-liketag"
-          :class="shop.isLiked ? 'active' : ''"
-          @click="toggleLike"
-          data-test="shop-liketag"
-        >
-          <FontAwesomeIcon
-            v-if="shop.isLiked"
-            :icon="icon.liked"
-            data-test="like-clicked"
-          />
-          <FontAwesomeIcon v-else :icon="icon.unliked" />
-        </div>
-      </figcaption>
+      <ItemInfoShop :shop="shop" @toggleLike="toggleLike" />
     </figure>
 
     <section class="item-info-body">
       <h2 data-test="item-name">{{ item.name }}</h2>
       <p v-if="isDiscounted">
-        <b data-test="discount-rate">{{ discountRate }}%</b>
-        <span data-test="discount-price">{{ discountPrice }}원</span>
+        <b data-test="discount-rate">{{ discountRate }}%&nbsp;</b>
+        <span data-test="discount-price">{{ discountPrice }}원&nbsp;</span>
         <del data-test="original-price">{{ originalPrice }}원</del>
       </p>
       <p v-else>
@@ -54,19 +24,11 @@
       <p v-html="item.desc" data-test="item-desc" />
 
       <h4>리뷰 ({{ reviews.length }})</h4>
-      <article id="review" v-for="review in reviews" :key="review.post.id">
-        <div class="review-post">
-          <b data-test="review-name">{{ review.user.name }}</b>
-          <span data-test="review-date">{{ review.post.date }}</span>
-          <h6 data-test="review-title">{{ review.post.title }}</h6>
-          <p data-test="review-content">{{ review.post.content }}</p>
-        </div>
-        <div
-          class="review-photo"
-          data-test="review-photo"
-          :style="`background-image: url(${review.post.photo})`"
-        />
-      </article>
+      <ItemInfoReview
+        v-for="review in reviews"
+        :key="review.post.id"
+        :review="review"
+      />
     </section>
 
     <footer class="item-info-footer" data-test="footer-wrapper">
@@ -95,18 +57,18 @@
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import itemData from '@/assets/itemData';
 import reviewData from '@/assets/reviewData';
+import ItemInfoShop from '@/components/ItemInfo/Shop.vue';
+import ItemInfoReview from '@/components/ItemInfo/Review.vue';
 import Modal from '@/components/Modal.vue';
 
 export default {
   name: 'ItemInfo',
 
   components: {
-    FontAwesomeIcon,
+    ItemInfoShop,
+    ItemInfoReview,
     Modal,
   },
 
@@ -114,10 +76,6 @@ export default {
     return {
       ...itemData,
       reviews: reviewData,
-      icon: {
-        liked: fasHeart,
-        unliked: farHeart,
-      },
       isModalShown: false,
     };
   },
@@ -170,50 +128,16 @@ export default {
         content: '';
       }
     }
-
-    #shop {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid lightgray;
-      padding: 12px 16px;
-
-      .shop-profile {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background-position: center;
-        background-size: cover;
-      }
-
-      .shop-caption {
-        margin: 0 auto 0 12px;
-        font-size: 16px;
-        text-align: left;
-
-        b {
-          font-weight: bold;
-        }
-      }
-
-      .shop-liketag {
-        margin-right: 2px;
-        font-size: 28px;
-        opacity: 0.4;
-        cursor: pointer;
-
-        &.active {
-          color: red;
-          opacity: 1;
-        }
-      }
-    }
   }
 
   .item-info-body {
     margin-bottom: 84px;
     padding: 6px 16px 0;
     text-align: left;
+
+    h4 {
+      margin-top: 32px;
+    }
 
     p {
       font-size: 18px;
@@ -236,46 +160,6 @@ export default {
         font-size: 16px;
       }
     }
-
-    h4 {
-      margin-top: 32px;
-    }
-
-    #review {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 16px;
-
-      .review-post {
-        width: 64%;
-        font-size: 16px;
-
-        span {
-          margin-left: 8px;
-          color: gray;
-          font-size: 15px;
-          vertical-align: top;
-        }
-
-        h6 {
-          margin: 2px 0;
-          font-size: 18px;
-          font-weight: bold;
-        }
-
-        p {
-          font-size: 16px;
-        }
-      }
-
-      .review-photo {
-        width: 120px;
-        height: 120px;
-        border: 1px solid lightgray;
-        background-position: center;
-        background-size: cover;
-      }
-    }
   }
 
   .item-info-footer {
@@ -284,6 +168,7 @@ export default {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
+
     width: 100%;
     max-width: 512px;
     border-top: 1px solid lightgray;
