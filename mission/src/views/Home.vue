@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue';
-import RotateText from '@/components/RotateText.vue';
+import HelloWorld from '@/components/Home/HelloWorld.vue';
+import RotateText from '@/components/Home/RotateText.vue';
 
 export default {
   name: 'Home',

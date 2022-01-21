@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import RotateText from '@/components/RotateText.vue';
+import RotateText from '@/components/Home/RotateText.vue';
 
 describe('RotateText.vue', () => {
   const wrapper = mount(RotateText);
