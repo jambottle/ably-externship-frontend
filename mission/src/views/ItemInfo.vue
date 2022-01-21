@@ -41,30 +41,30 @@
 
     <section class="item-info-body">
       <h2 data-test="item-name">{{ item.name }}</h2>
-      <p v-if="item.price.discount !== item.price.original">
-        <b data-test="discount-rate"> {{ discountRate }}% </b>
-        <span data-test="discount-price"> {{ discountPrice }}원 </span>
-        <del data-test="original-price"> {{ originalPrice }}원 </del>
+      <p v-if="isDiscounted">
+        <b data-test="discount-rate">{{ discountRate }}%</b>
+        <span data-test="discount-price">{{ discountPrice }}원</span>
+        <del data-test="original-price">{{ originalPrice }}원</del>
       </p>
       <p v-else>
-        <span data-test="original-price"> {{ originalPrice }}원 </span>
+        <span data-test="discount-price">{{ discountPrice }}원</span>
       </p>
 
       <h4>상품정보</h4>
       <p v-html="item.desc" data-test="item-desc" />
 
       <h4>리뷰 ({{ reviews.length }})</h4>
-      <article id="review" v-for="review in reviews" :key="review.id">
+      <article id="review" v-for="review in reviews" :key="review.post.id">
         <div class="review-post">
-          <b data-test="review-name">{{ review.userName }}</b>
-          <span data-test="review-date">{{ review.postDate }}</span>
-          <h6 data-test="review-title">{{ review.postTitle }}</h6>
-          <p data-test="review-content">{{ review.postContent }}</p>
+          <b data-test="review-name">{{ review.user.name }}</b>
+          <span data-test="review-date">{{ review.post.date }}</span>
+          <h6 data-test="review-title">{{ review.post.title }}</h6>
+          <p data-test="review-content">{{ review.post.content }}</p>
         </div>
         <div
           class="review-photo"
           data-test="review-photo"
-          :style="`background-image: url(${review.postPhoto})`"
+          :style="`background-image: url(${review.post.photo})`"
         />
       </article>
     </section>
@@ -123,6 +123,9 @@ export default {
   },
 
   computed: {
+    isDiscounted() {
+      return this.item.price.discount !== this.item.price.original;
+    },
     discountRate() {
       const rate = 1 - this.item.price.discount / this.item.price.original;
       return Math.round(rate * 100);
