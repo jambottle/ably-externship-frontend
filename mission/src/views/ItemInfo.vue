@@ -34,8 +34,8 @@
     <footer class="item-info-footer" data-test="footer-wrapper">
       <button
         class="w3-round-large w3-black w3-xlarge w3-padding-small"
-        @click="showModal"
         data-test="footer-button"
+        @click="showModal"
       >
         <strong>{{ discountPrice }}</strong
         >원 구매
@@ -170,6 +170,7 @@ export default {
     transform: translate(-50%, 0);
 
     width: 100%;
+    height: 61px;
     max-width: 512px;
     border-top: 1px solid lightgray;
     background: white;

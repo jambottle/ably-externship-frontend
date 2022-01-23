@@ -18,9 +18,9 @@
     </div>
     <div
       class="shop-liketag"
-      :class="shop.isLiked ? 'active' : ''"
-      @click="$emit('toggleLike')"
       data-test="shop-liketag"
+      @click="$emit('toggleLike')"
+      :class="shop.isLiked ? 'active' : ''"
     >
       <FontAwesomeIcon
         v-if="shop.isLiked"
