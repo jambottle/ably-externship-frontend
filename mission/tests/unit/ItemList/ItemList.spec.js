@@ -1,10 +1,14 @@
 import { mount } from '@vue/test-utils';
-import ItemInfoPage from '@/views/ItemList.vue';
+import ItemList from '@/views/ItemList.vue';
 
-describe('ItemListPage', () => {
-  it('redners ItemListPage', () => {
-    const wrapper = mount(ItemInfoPage);
+describe('ItemList.vue', () => {
+  const wrapper = mount(ItemList);
 
-    expect(wrapper.find('#item-list-page').exists()).toBe(true);
+  it('redners header element', () => {
+    expect(wrapper.get('header[data-test="header-wrapper"]').exists()).toBe(true);
+  });
+
+  it('redners nav element', () => {
+    expect(wrapper.get('nav[data-test="footer-wrapper"]').exists()).toBe(true);
   });
 });
