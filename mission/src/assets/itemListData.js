@@ -11,13 +11,13 @@ export default [
   },
   {
     id: 2,
-    name: '뉴욕 스트릿 풋웨어 2',
-    desc: '상품 설명이 길어질 경우에는 다음과 같이 표시됩니다.',
-    price: {
-      discount: 298000,
-      original: 298000,
-    },
-    profile: 'https://images.unsplash.com/photo-1549298916-b41d501d3772',
+    // name: '뉴욕 스트릿 풋웨어 2',
+    // desc: '상품 설명이 길어질 경우에는 다음과 같이 표시됩니다.',
+    // price: {
+    //   discount: 298000,
+    //   original: 298000,
+    // },
+    // profile: 'https://images.unsplash.com/photo-1549298916-b41d501d3772',
   },
   {
     id: 3,

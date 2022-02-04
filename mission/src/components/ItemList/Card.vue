@@ -3,7 +3,7 @@
     <div
       class="item-profile"
       data-test="item-profile"
-      :style="`background-image: url(${item.profile})`"
+      :style="`background-image: url(${profile})`"
     />
 
     <p v-if="isDiscounted" class="item-price">
@@ -14,8 +14,8 @@
       <span data-test="discount-price">{{ discountPrice }}원</span>
     </p>
 
-    <h2 class="item-name" data-test="item-name">{{ item.name }}</h2>
-    <p class="item-desc">상품 설명이 길어질 경우에는 다음과 같이 표시됩니다.</p>
+    <h2 class="item-name" data-test="item-name">{{ name }}</h2>
+    <p class="item-desc">{{ desc }}</p>
   </article>
 </template>
 
@@ -24,22 +24,33 @@ export default {
   name: 'ItemListCard',
 
   props: {
-    item: Object,
+    name: { type: String, default: '(미등록 상품)' },
+    desc: { type: String, default: '(미등록 상품 설명란)' },
+    price: {
+      type: Object,
+      default() {
+        return { discount: 0, original: 0 };
+      },
+    },
+    profile: {
+      type: String,
+      default: 'https://images.unsplash.com/photo-1570395623789-d9c9a31598a6',
+    },
   },
 
   computed: {
     isDiscounted() {
-      return this.item.price.discount !== this.item.price.original;
+      return this.price.discount !== this.price.original;
     },
     discountRate() {
-      const rate = 1 - this.item.price.discount / this.item.price.original;
+      const rate = 1 - this.price.discount / this.price.original;
       return Math.round(rate * 100);
     },
     discountPrice() {
-      return this.item.price.discount.toLocaleString();
+      return this.price.discount.toLocaleString();
     },
     originalPrice() {
-      return this.item.price.original.toLocaleString();
+      return this.price.original.toLocaleString();
     },
   },
 };

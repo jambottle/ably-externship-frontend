@@ -2,7 +2,14 @@
   <ItemListHeader />
 
   <main id="item-list">
-    <ItemListCard v-for="item in items" :key="item.id" :item="item" />
+    <ItemListCard
+      v-for="item in items"
+      :key="item.id"
+      :name="item.name"
+      :desc="item.desc"
+      :price="item.price"
+      :profile="item.profile"
+    />
   </main>
 
   <ItemListFooter />
