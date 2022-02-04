@@ -20,15 +20,11 @@
 </template>
 
 <script>
-import itemData from '@/assets/itemData';
-
 export default {
   name: 'ItemListCard',
 
-  data() {
-    return {
-      ...itemData,
-    };
+  props: {
+    item: Object,
   },
 
   computed: {

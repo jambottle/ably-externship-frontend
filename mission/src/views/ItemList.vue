@@ -2,13 +2,14 @@
   <ItemListHeader />
 
   <main id="item-list">
-    <ItemListCard v-for="card in 8" :key="card" />
+    <ItemListCard v-for="item in items" :key="item.id" :item="item" />
   </main>
 
   <ItemListFooter />
 </template>
 
 <script>
+import itemListData from '@/assets/itemListData';
 import ItemListHeader from '@/components/ItemList/Header.vue';
 import ItemListCard from '@/components/ItemList/Card.vue';
 import ItemListFooter from '@/components/ItemList/Footer.vue';
@@ -23,7 +24,9 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      items: itemListData,
+    };
   },
 };
 </script>
