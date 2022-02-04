@@ -1,5 +1,9 @@
 <template>
-  <header id="header" data-test="header-wrapper">
+  <header
+    id="header"
+    data-test="header-wrapper"
+    :class="hasScrolled ? 'hidden' : ''"
+  >
     <h1>DefJam Streetwear</h1>
   </header>
 </template>
@@ -7,11 +11,44 @@
 <script>
 export default {
   name: 'ItemListHeader',
+
+  data() {
+    return {
+      scrollPosition: 0,
+    };
+  },
+
+  computed: {
+    hasScrolled() {
+      return this.scrollPosition !== 0;
+    },
+  },
+
+  methods: {
+    updateScroll() {
+      this.scrollPosition = window.scrollY;
+    },
+  },
+
+  created() {
+    window.addEventListener('scroll', this.updateScroll);
+  },
+
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.updateScroll);
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 #header {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  transition: top 0.2s ease-in-out;
+
   width: 100%;
   height: 61px;
   max-width: 512px;
@@ -26,6 +63,10 @@ export default {
     line-height: 60px;
     text-align: center;
     vertical-align: middle;
+  }
+
+  &.hidden {
+    top: -61px;
   }
 }
 </style>
