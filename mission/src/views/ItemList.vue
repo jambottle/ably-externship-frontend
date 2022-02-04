@@ -45,7 +45,7 @@ export default {
 
   width: 100%;
   max-width: 512px;
-  margin: 0 auto 84px;
+  margin: 61px auto 84px;
   padding: 6px 0 0 16px;
   text-align: left;
 }
