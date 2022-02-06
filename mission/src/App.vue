@@ -1,6 +1,22 @@
 <template>
+  <AppHeader />
   <router-view />
+  <AppFooter />
 </template>
+
+<script>
+import AppHeader from '@/components/App/Header.vue';
+import AppFooter from '@/components/App/Footer.vue';
+
+export default {
+  name: 'App',
+
+  components: {
+    AppHeader,
+    AppFooter,
+  },
+};
+</script>
 
 <style>
 @import './assets/scss/reset.scss';

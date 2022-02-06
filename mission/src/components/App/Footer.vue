@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import footerData from '@/assets/footerData';
 
 export default {
-  name: 'ItemListFooter',
+  name: 'AppFooter',
 
   components: {
     FontAwesomeIcon,

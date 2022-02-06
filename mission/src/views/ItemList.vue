@@ -1,6 +1,4 @@
 <template>
-  <ItemListHeader />
-
   <main id="item-list">
     <ItemListCard
       v-for="item in items"
@@ -11,23 +9,17 @@
       :profile="item.profile"
     />
   </main>
-
-  <ItemListFooter />
 </template>
 
 <script>
-import itemListData from '@/assets/itemListData';
-import ItemListHeader from '@/components/ItemList/Header.vue';
 import ItemListCard from '@/components/ItemList/Card.vue';
-import ItemListFooter from '@/components/ItemList/Footer.vue';
+import itemListData from '@/assets/itemListData';
 
 export default {
   name: 'ItemList',
 
   components: {
-    ItemListHeader,
     ItemListCard,
-    ItemListFooter,
   },
 
   data() {
