@@ -4,9 +4,9 @@
       <div
         class="item-profile"
         data-test="item-profile"
-        :style="`background-image: url(${item.profile})`"
+        :style="`background-image: url(${item.image})`"
       />
-      <ItemInfoShop :shop="shop" @toggleLike="toggleLike" />
+      <ItemInfoShop :shop="item.seller" @toggleLike="toggleLike" />
     </figure>
 
     <section class="item-info-body">
@@ -21,12 +21,12 @@
       </p>
 
       <h4>상품정보</h4>
-      <p v-html="item.desc" data-test="item-desc" />
+      <p v-html="item.description" data-test="item-desc" />
 
-      <h4>리뷰 ({{ reviews.length }})</h4>
+      <h4>리뷰 ({{ item.reviews.length }})</h4>
       <ItemInfoReview
-        v-for="review in reviews"
-        :key="review.post.id"
+        v-for="review in item.reviews"
+        :key="review.review_no"
         :review="review"
       />
     </section>
@@ -57,14 +57,13 @@
 </template>
 
 <script>
-import itemData from '@/assets/itemData';
-import reviewData from '@/assets/reviewData';
+import axios from 'axios';
 import ItemInfoShop from '@/components/ItemInfo/Shop.vue';
 import ItemInfoReview from '@/components/ItemInfo/Review.vue';
 import Modal from '@/components/Modal.vue';
 
 export default {
-  name: 'ItemInfo',
+  name: 'ItemInfoPage',
 
   components: {
     ItemInfoShop,
@@ -74,35 +73,63 @@ export default {
 
   data() {
     return {
-      ...itemData,
-      reviews: reviewData,
+      item: {
+        product_no: '',
+        name: '',
+        description: '',
+        price: 0,
+        original_price: 0,
+        image: '',
+        seller: {
+          seller_no: 0,
+          name: '',
+          hash_tags: [],
+          profile_image: '',
+        },
+        reviews: [],
+      },
       isModalShown: false,
     };
   },
 
   computed: {
     isDiscounted() {
-      return this.item.price.discount !== this.item.price.original;
+      return this.item.price !== this.item.original_price;
     },
     discountRate() {
-      const rate = 1 - this.item.price.discount / this.item.price.original;
+      const rate = 1 - this.item.price / this.item.original_price;
       return Math.round(rate * 100);
     },
     discountPrice() {
-      return this.item.price.discount.toLocaleString();
+      return this.item.price.toLocaleString();
     },
     originalPrice() {
-      return this.item.price.original.toLocaleString();
+      return this.item.original_price.toLocaleString();
     },
   },
 
   methods: {
+    getItemInfo() {
+      axios
+        .get(
+          `https://virtserver.swaggerhub.com/lkaybob/projectlion-vue/1.0.0/item/${this.$route.params.itemNo}`,
+          // eslint-disable-next-line comma-dangle
+          { headers: { Authorization: 'abcd1234' } }
+        )
+        .then((response) => {
+          this.item = response.data.item;
+        });
+    },
     toggleLike() {
-      this.shop.isLiked = !this.shop.isLiked;
+      this.item.seller.isLiked = !this.item.seller.isLiked;
     },
     showModal() {
       this.isModalShown = true;
     },
+  },
+
+  created() {
+    this.getItemInfo();
   },
 };
 </script>

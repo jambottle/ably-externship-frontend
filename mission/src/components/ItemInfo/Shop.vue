@@ -3,13 +3,13 @@
     <div
       class="shop-profile"
       data-test="shop-profile"
-      :style="`background-image: url(${shop.profile})`"
+      :style="`background-image: url(${shop.profile_image})`"
     />
     <div class="shop-caption">
       <b data-test="shop-name">{{ shop.name }}</b>
       <br />
       <span
-        v-for="(tag, index) in shop.tags"
+        v-for="(tag, index) in shop.hash_tags"
         :key="index"
         data-test="shop-tags"
       >
