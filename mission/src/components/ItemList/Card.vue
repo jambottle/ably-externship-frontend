@@ -54,7 +54,14 @@ export default {
 
 <style lang="scss" scoped>
 #card {
-  width: 50%;
+  width: 40%;
+  margin-right: 36px;
+  padding: 12px 0 20px 24px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 10px 10px 10px lightgray;
+  }
 
   .item-profile {
     width: 160px;
