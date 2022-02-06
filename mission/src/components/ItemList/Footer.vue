@@ -9,12 +9,7 @@
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import {
-  faHome,
-  faBookmark,
-  faShoppingCart,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import footerData from '@/assets/footerData';
 
 export default {
   name: 'ItemListFooter',
@@ -25,32 +20,7 @@ export default {
 
   data() {
     return {
-      links: [
-        {
-          id: 1,
-          icon: faHome,
-          name: '홈',
-          url: '/',
-        },
-        {
-          id: 2,
-          icon: faBookmark,
-          name: '찜 목록',
-          url: '/keep',
-        },
-        {
-          id: 3,
-          icon: faShoppingCart,
-          name: '장바구니',
-          url: '/cart',
-        },
-        {
-          id: 4,
-          icon: faUser,
-          name: '마이 페이지',
-          url: '/mypage',
-        },
-      ],
+      links: footerData,
     };
   },
 };
