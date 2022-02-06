@@ -36,7 +36,9 @@ export default {
 
   computed: {
     isDiscounted() {
-      return this.discount_price !== this.original_price;
+      return (
+        this.discount_price !== this.original_price && this.original_price !== 0
+      );
     },
     discountRate() {
       const rate = 1 - this.discount_price / this.original_price;
