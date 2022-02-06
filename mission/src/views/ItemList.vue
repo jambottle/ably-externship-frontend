@@ -8,6 +8,7 @@
       :discount_price="item.price"
       :original_price="item.original_price"
       :profile="item.image"
+      @click="$router.push({ path: `/item/${item.product_no}` })"
     />
   </main>
 </template>
@@ -38,7 +39,6 @@ export default {
           { headers: { Authorization: 'abcd1234' } }
         )
         .then((response) => {
-          console.log(response.data.items);
           this.items = response.data.items;
         });
     },
