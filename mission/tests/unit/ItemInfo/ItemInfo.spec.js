@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
-import ItemInfo from '@/views/ItemInfo.vue';
+import ItemInfoPage from '@/views/ItemInfo.vue';
 
 describe('ItemInfo.vue', () => {
   describe('#1. Shop Info Section', () => {
-    const wrapper = mount(ItemInfo);
+    const wrapper = mount(ItemInfoPage);
 
     it('renders profile image, name and hashtags of shop', async () => {
       const testShopName = '대한양복';
@@ -32,7 +32,7 @@ describe('ItemInfo.vue', () => {
   });
 
   describe('#2. Item Info Section', () => {
-    const wrapper = mount(ItemInfo);
+    const wrapper = mount(ItemInfoPage);
 
     beforeEach(async () => {
       await wrapper.setData({
@@ -116,7 +116,7 @@ describe('ItemInfo.vue', () => {
   });
 
   describe('#3. Review List Section', () => {
-    const wrapper = mount(ItemInfo);
+    const wrapper = mount(ItemInfoPage);
 
     it('displays reviews with post and attatched photo of each review', async () => {
       const testReviews = [{

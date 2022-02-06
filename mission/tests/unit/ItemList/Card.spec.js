@@ -14,10 +14,8 @@ describe('Card.vue', () => {
     await wrapper.setProps({
       name: testItemName,
       desc: testItemDesc,
-      price: {
-        discount: testItemDiscountPrice,
-        original: testItemOriginalPrice,
-      },
+      discount_price: testItemDiscountPrice,
+      original_price: testItemOriginalPrice,
     });
 
     expect(wrapper.get('div[data-test="item-profile"]').exists()).toBe(true);
