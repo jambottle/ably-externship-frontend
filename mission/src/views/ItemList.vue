@@ -2,21 +2,22 @@
   <main id="item-list">
     <ItemListCard
       v-for="item in items"
-      :key="item.id"
+      :key="item.product_no"
       :name="item.name"
-      :desc="item.desc"
-      :price="item.price"
-      :profile="item.profile"
+      :desc="item.description"
+      :discount_price="item.price"
+      :original_price="item.original_price"
+      :profile="item.image"
     />
   </main>
 </template>
 
 <script>
+import axios from 'axios';
 import ItemListCard from '@/components/ItemList/Card.vue';
-import itemListData from '@/assets/itemListData';
 
 export default {
-  name: 'ItemList',
+  name: 'ItemListPage',
 
   components: {
     ItemListCard,
@@ -24,8 +25,27 @@ export default {
 
   data() {
     return {
-      items: itemListData,
+      items: [],
     };
+  },
+
+  methods: {
+    getItemList() {
+      axios
+        .get(
+          'https://virtserver.swaggerhub.com/lkaybob/projectlion-vue/1.0.0/item',
+          // eslint-disable-next-line comma-dangle
+          { headers: { Authorization: 'abcd1234' } }
+        )
+        .then((response) => {
+          console.log(response.data.items);
+          this.items = response.data.items;
+        });
+    },
+  },
+
+  created() {
+    this.getItemList();
   },
 };
 </script>

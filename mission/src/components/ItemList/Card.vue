@@ -26,12 +26,8 @@ export default {
   props: {
     name: { type: String, default: '(미등록 상품)' },
     desc: { type: String, default: '(미등록 상품 설명란)' },
-    price: {
-      type: Object,
-      default() {
-        return { discount: 0, original: 0 };
-      },
-    },
+    discount_price: { type: Number, default: 0 },
+    original_price: { type: Number, default: 0 },
     profile: {
       type: String,
       default: 'https://images.unsplash.com/photo-1570395623789-d9c9a31598a6',
@@ -40,17 +36,17 @@ export default {
 
   computed: {
     isDiscounted() {
-      return this.price.discount !== this.price.original;
+      return this.discount_price !== this.original_price;
     },
     discountRate() {
-      const rate = 1 - this.price.discount / this.price.original;
+      const rate = 1 - this.discount_price / this.original_price;
       return Math.round(rate * 100);
     },
     discountPrice() {
-      return this.price.discount.toLocaleString();
+      return this.discount_price.toLocaleString();
     },
     originalPrice() {
-      return this.price.original.toLocaleString();
+      return this.original_price.toLocaleString();
     },
   },
 };
