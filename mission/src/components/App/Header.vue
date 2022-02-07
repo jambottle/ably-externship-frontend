@@ -63,6 +63,7 @@ export default {
     line-height: 60px;
     text-align: center;
     vertical-align: middle;
+    cursor: pointer;
   }
 
   &.hidden {
