@@ -51,7 +51,8 @@ export default {
 
   width: 100%;
   max-width: 512px;
-  margin: 0 0 84px 2px;
+  margin: 0 auto 84px;
+  padding: 6px 0 0 16px;
   text-align: left;
 }
 </style>
