@@ -57,10 +57,12 @@
 </template>
 
 <script>
-import axios from 'axios';
 import ItemInfoShop from '@/components/ItemInfo/Shop.vue';
 import ItemInfoReview from '@/components/ItemInfo/Review.vue';
 import Modal from '@/components/Modal.vue';
+import Repository from '@/repositories/RepositoryFactory';
+
+const ItemRepository = Repository.get('item');
 
 export default {
   name: 'ItemInfoPage',
@@ -109,16 +111,10 @@ export default {
   },
 
   methods: {
-    getItemInfo() {
-      axios
-        .get(
-          `https://virtserver.swaggerhub.com/lkaybob/projectlion-vue/1.0.0/item/${this.$route.params.itemNo}`,
-          // eslint-disable-next-line comma-dangle
-          { headers: { Authorization: 'abcd1234' } }
-        )
-        .then((response) => {
-          this.item = response.data.item;
-        });
+    async getItemInfo() {
+      const { itemNo } = this.$route.params;
+      const { data } = await ItemRepository.getItemInfo(itemNo);
+      this.item = data.item;
     },
     toggleLike() {
       this.item.seller.isLiked = !this.item.seller.isLiked;

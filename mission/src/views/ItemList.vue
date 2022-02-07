@@ -14,8 +14,10 @@
 </template>
 
 <script>
-import axios from 'axios';
 import ItemListCard from '@/components/ItemList/Card.vue';
+import Repository from '@/repositories/RepositoryFactory';
+
+const ItemRepository = Repository.get('item');
 
 export default {
   name: 'ItemListPage',
@@ -31,16 +33,9 @@ export default {
   },
 
   methods: {
-    getItemList() {
-      axios
-        .get(
-          'https://virtserver.swaggerhub.com/lkaybob/projectlion-vue/1.0.0/item',
-          // eslint-disable-next-line comma-dangle
-          { headers: { Authorization: 'abcd1234' } }
-        )
-        .then((response) => {
-          this.items = response.data.items;
-        });
+    async getItemList() {
+      const { data } = await ItemRepository.getItemList();
+      this.items = data.items;
     },
   },
 
