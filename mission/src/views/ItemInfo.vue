@@ -154,7 +154,7 @@ export default {
   }
 
   .item-info-body {
-    margin-bottom: 84px;
+    margin-bottom: 150px;
     padding: 6px 16px 0;
     text-align: left;
 
@@ -188,7 +188,7 @@ export default {
   .item-info-footer {
     position: fixed;
     z-index: 5;
-    bottom: 0;
+    bottom: 61px;
     left: 50%;
     transform: translate(-50%, 0);
 
