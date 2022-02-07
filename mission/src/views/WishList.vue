@@ -13,8 +13,10 @@
 </template>
 
 <script>
-import axios from 'axios';
 import ItemListCard from '@/components/ItemList/Card.vue';
+import Repository from '@/repositories/RepositoryFactory';
+
+const WishRepository = Repository.get('wish');
 
 export default {
   name: 'WishListPage',
@@ -30,16 +32,9 @@ export default {
   },
 
   methods: {
-    getWishList() {
-      axios
-        .get(
-          'https://virtserver.swaggerhub.com/lkaybob/projectlion-vue/1.0.0/wish',
-          // eslint-disable-next-line comma-dangle
-          { headers: { Authorization: 'abcd1234' } }
-        )
-        .then((response) => {
-          this.items = response.data.items;
-        });
+    async getWishList() {
+      const { data } = await WishRepository.getWishList();
+      this.items = data.items;
     },
   },
 
