@@ -3,16 +3,12 @@
     <div
       class="shop-profile"
       data-test="shop-profile"
-      :style="`background-image: url(${shop.profile_image})`"
+      :style="`background-image: url(${profile})`"
     />
     <div class="shop-caption">
-      <b data-test="shop-name">{{ shop.name }}</b>
+      <b data-test="shop-name">{{ name }}</b>
       <br />
-      <span
-        v-for="(tag, index) in shop.hash_tags"
-        :key="index"
-        data-test="shop-tags"
-      >
+      <span v-for="(tag, index) in tags" :key="index" data-test="shop-tags">
         #{{ tag }}
       </span>
     </div>
@@ -20,10 +16,10 @@
       class="shop-liketag"
       data-test="shop-liketag"
       @click="$emit('toggleLike')"
-      :class="shop.isLiked ? 'active' : ''"
+      :class="isLiked ? 'active' : ''"
     >
       <FontAwesomeIcon
-        v-if="shop.isLiked"
+        v-if="isLiked"
         :icon="icon.liked"
         data-test="like-clicked"
       />
@@ -45,7 +41,18 @@ export default {
   },
 
   props: {
-    shop: Object,
+    name: { type: String, default: '(판매자 정보 없음)' },
+    tags: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+    profile: {
+      type: String,
+      default: 'https://images.unsplash.com/photo-1570395623789-d9c9a31598a6',
+    },
+    isLiked: { type: Boolean, default: false },
   },
 
   data() {

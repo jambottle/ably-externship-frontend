@@ -6,7 +6,13 @@
         data-test="item-profile"
         :style="`background-image: url(${item.image})`"
       />
-      <ItemInfoShop :shop="item.seller" @toggleLike="toggleLike" />
+      <ItemInfoShop
+        :name="item.seller.name"
+        :tags="item.seller.hash_tags"
+        :profile="item.seller.profile_image"
+        :isLiked="item.seller.isLiked"
+        @toggleLike="toggleLike"
+      />
     </figure>
 
     <section class="item-info-body">
@@ -87,8 +93,10 @@ export default {
           name: '',
           hash_tags: [],
           profile_image: '',
+          isLiked: false,
         },
         reviews: [],
+        isLiked: false,
       },
       isModalShown: false,
     };

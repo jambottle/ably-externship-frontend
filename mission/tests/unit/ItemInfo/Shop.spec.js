@@ -3,7 +3,7 @@ import ItemInfoShop from '@/components/ItemInfo/Shop.vue';
 
 const testShopInfo = {
   name: '캡틴 아메리카 방패',
-  hash_tags: ['비브라늄', '고강도'],
+  tags: ['비브라늄', '고강도'],
   isLiked: false,
 };
 
@@ -12,22 +12,11 @@ describe('Shop.vue', () => {
     const wrapper = mount(ItemInfoShop);
 
     await wrapper.setProps({
-      shop: testShopInfo,
+      ...testShopInfo,
     });
 
     expect(wrapper.get('div[data-test="shop-profile"]').exists()).toBe(true);
     expect(wrapper.get('b[data-test="shop-name"]').text()).toBe(testShopInfo.name);
-    expect(wrapper.get('span[data-test="shop-tags"]').text()).toContain(testShopInfo.hash_tags[0]);
-  });
-
-  it('fills empty like tag of shop by click event', async () => {
-    const wrapper = mount(ItemInfoShop);
-
-    await wrapper.setProps({
-      shop: testShopInfo,
-    });
-    await wrapper.get('div[data-test="shop-liketag"]').trigger('click');
-
-    expect(wrapper.get('svg[data-test="like-clicked"]').isVisible()).toBe(true);
+    expect(wrapper.get('span[data-test="shop-tags"]').text()).toContain(testShopInfo.tags[0]);
   });
 });

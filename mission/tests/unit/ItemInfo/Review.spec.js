@@ -3,9 +3,9 @@ import ItemInfoReview from '@/components/ItemInfo/Review.vue';
 
 const testReviewInfo = {
   writer: 'Cristian Romero',
-  created: '2022. 01. 17',
   title: 'test review title',
   content: 'test review content',
+  created: '2022. 01. 17',
 };
 
 describe('Review.vue', () => {

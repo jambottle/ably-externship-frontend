@@ -19,7 +19,18 @@ export default {
   name: 'ItemInfoReview',
 
   props: {
-    review: Object,
+    review: {
+      type: Object,
+      default() {
+        return {
+          writer: String,
+          title: String,
+          content: String,
+          created: String,
+          img: String,
+        };
+      },
+    },
   },
 };
 </script>
