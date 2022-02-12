@@ -1,5 +1,25 @@
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
+import { createRouter, createWebHistory } from 'vue-router';
+
+import App from '@/App.vue';
 import ItemListCard from '@/components/ItemList/Card.vue';
+import ItemListPage from '@/views/ItemList.vue';
+import ItemInfoPage from '@/views/ItemInfo.vue';
+import ItemRoutes from '@/router/ItemRoutes';
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: ItemListPage,
+  },
+  ...ItemRoutes,
+];
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
+});
 
 const testItemInfo = {
   name: '아이언맨 마크 42',
@@ -21,5 +41,23 @@ describe('Card.vue', () => {
     expect(wrapper.get('span[data-test="discount-price"]').text()).toBe(`${testItemInfo.discount_price.toLocaleString()}원`);
     expect(wrapper.get('h2[data-test="item-name"]').text()).toBe(testItemInfo.name);
     expect(wrapper.get('p[data-test="item-desc"]').text()).toBe(testItemInfo.desc);
+  });
+
+  it('routes to ItemInfoPage when the card is clicked', async () => {
+    router.push('/');
+    await router.isReady();
+
+    const container = mount(App, {
+      global: {
+        plugins: [router],
+      },
+    });
+
+    setTimeout(async () => {
+      await container.get('[data-test="item-router"]').trigger('click');
+      await flushPromises();
+
+      expect(container.findComponent(ItemInfoPage).exists()).toBe(true);
+    }, 500);
   });
 });

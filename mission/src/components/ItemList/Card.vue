@@ -1,6 +1,6 @@
 <template>
   <article id="card">
-    <router-link :to="`/item/${id}`">
+    <router-link :to="`/item/${id}`" data-test="item-router">
       <div
         class="item-profile"
         data-test="item-profile"
