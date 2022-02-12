@@ -1,7 +1,16 @@
 <template>
   <nav id="footer" data-test="footer-wrapper">
-    <router-link v-for="link in links" :key="link.id" :to="link.url">
-      <FontAwesomeIcon :icon="link.icon" /><br />
+    <router-link
+      v-for="link in links"
+      :key="link.id"
+      :to="link.url"
+      data-test="footer-router"
+    >
+      <FontAwesomeIcon
+        :icon="link.icon"
+        :data-test="`footer-router-${link.id}`"
+      />
+      <br />
       {{ link.name }}
     </router-link>
   </nav>
