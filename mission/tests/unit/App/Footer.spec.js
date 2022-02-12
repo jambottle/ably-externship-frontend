@@ -3,10 +3,13 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import App from '@/App.vue';
 import AppFooter from '@/components/App/Footer.vue';
+import footerData from '@/assets/footerData';
+
 import ItemListPage from '@/views/ItemList.vue';
 import WishListPage from '@/views/WishList.vue';
 import CartListPage from '@/views/CartList.vue';
 import UserInfoPage from '@/views/UserInfo.vue';
+
 import WishRoutes from '@/router/WishRoutes';
 import CartRoutes from '@/router/CartRoutes';
 import InfoRoutes from '@/router/InfoRoutes';
@@ -33,6 +36,24 @@ describe('Footer.vue', () => {
 
     expect(wrapper.get('[data-test="footer-wrapper"]').exists()).toBe(true);
     expect(wrapper.get('[data-test="footer-router"] svg').exists()).toBe(true);
+  });
+
+  it('renders multiple navigation icons', async () => {
+    const wrapper = mount(AppFooter);
+
+    await wrapper.setData({
+      links: footerData,
+    });
+
+    const listWrapper = wrapper.findAll('[data-test="footer-router"]');
+
+    expect(listWrapper).toHaveLength(footerData.length);
+
+    for (let i = 0; i < footerData.length; i += 1) {
+      const linkWrapper = listWrapper[i];
+
+      expect(linkWrapper.get('[data-test="footer-router"] svg').exists()).toBe(true);
+    }
   });
 
   it('routes to ItemListPage when home icon is clicked', async () => {
