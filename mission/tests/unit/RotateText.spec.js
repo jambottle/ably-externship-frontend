@@ -14,34 +14,34 @@ describe('RotateText.vue', () => {
   });
 
   it('has paragraph element', () => {
-    expect(wrapper.get('p[data-test="output"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="output"]').exists()).toBe(true);
   });
 
   it('displays text from text-type input', async () => {
     const testText = 'Hello from test code!';
 
-    await wrapper.get('input[data-test="input"]').setValue(testText);
+    await wrapper.get('[data-test="input"]').setValue(testText);
 
-    expect(wrapper.get('p[data-test="output"]').text()).toEqual(testText);
+    expect(wrapper.get('[data-test="output"]').text()).toEqual(testText);
   });
 
   it('rotates text to left one at a time per button click', async () => {
     const testText = 'I am rotating!';
     const resultText = ' am rotating!I'.trim();
 
-    await wrapper.get('input[data-test="input"]').setValue(testText);
-    await wrapper.get('button[data-test="rotate"]').trigger('click');
+    await wrapper.get('[data-test="input"]').setValue(testText);
+    await wrapper.get('[data-test="rotate"]').trigger('click');
 
-    expect(wrapper.get('p[data-test="output"]').text()).toBe(resultText);
+    expect(wrapper.get('[data-test="output"]').text()).toBe(resultText);
   });
 
   // 1주차 미션 (심화): 입력된 문자열과 버튼 클릭 횟수를 알림창에 띄우기
   it('shows modal with text and click counter', async () => {
     const testText = 'Text shown on modal!';
 
-    await wrapper.get('input[data-test="input"]').setValue(testText);
-    await wrapper.get('button[data-test="click"]').trigger('click');
-    await wrapper.get('button[data-test="click"]').trigger('click');
+    await wrapper.get('[data-test="input"]').setValue(testText);
+    await wrapper.get('[data-test="click"]').trigger('click');
+    await wrapper.get('[data-test="click"]').trigger('click');
 
     expect(wrapper.get('div[class="modal-body"]').text()).toContain(testText);
     expect(wrapper.get('div[class="modal-body"]').text()).toContain(2);

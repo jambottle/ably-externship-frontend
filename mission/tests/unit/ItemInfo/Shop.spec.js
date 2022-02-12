@@ -15,8 +15,8 @@ describe('Shop.vue', () => {
       ...testShopInfo,
     });
 
-    expect(wrapper.get('div[data-test="shop-profile"]').exists()).toBe(true);
-    expect(wrapper.get('b[data-test="shop-name"]').text()).toBe(testShopInfo.name);
-    expect(wrapper.get('span[data-test="shop-tags"]').text()).toContain(testShopInfo.tags[0]);
+    expect(wrapper.get('[data-test="shop-profile"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="shop-name"]').text()).toBe(testShopInfo.name);
+    expect(wrapper.get('[data-test="shop-tags"]').text()).toContain(testShopInfo.tags[0]);
   });
 });

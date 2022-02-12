@@ -16,10 +16,10 @@ describe('Review.vue', () => {
       review: testReviewInfo,
     });
 
-    expect(wrapper.get('b[data-test="review-name"]').text()).toBe(testReviewInfo.writer);
-    expect(wrapper.get('span[data-test="review-date"]').text()).toBe(testReviewInfo.created);
-    expect(wrapper.get('h6[data-test="review-title"]').text()).toBe(testReviewInfo.title);
-    expect(wrapper.get('p[data-test="review-content"]').text()).toBe(testReviewInfo.content);
-    expect(wrapper.get('div[data-test="review-photo"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="review-name"]').text()).toBe(testReviewInfo.writer);
+    expect(wrapper.get('[data-test="review-date"]').text()).toBe(testReviewInfo.created);
+    expect(wrapper.get('[data-test="review-title"]').text()).toBe(testReviewInfo.title);
+    expect(wrapper.get('[data-test="review-content"]').text()).toBe(testReviewInfo.content);
+    expect(wrapper.get('[data-test="review-photo"]').exists()).toBe(true);
   });
 });
