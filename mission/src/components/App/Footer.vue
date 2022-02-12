@@ -9,6 +9,7 @@
       <FontAwesomeIcon
         :icon="link.icon"
         :data-test="`footer-router-${link.id}`"
+        :style="{ color: setIconActive(link.url) }"
       />
       <br />
       {{ link.name }}
@@ -31,6 +32,12 @@ export default {
     return {
       links: footerData,
     };
+  },
+
+  methods: {
+    setIconActive(url) {
+      return this.$route.path === url ? '#fd7e14' : 'inherit';
+    },
   },
 };
 </script>
