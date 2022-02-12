@@ -56,12 +56,12 @@ export default {
 <style lang="scss" scoped>
 #item-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-template-columns: repeat(2, 50%);
   grid-auto-flow: row;
 
-  width: 95%;
   max-width: 512px;
-  margin: 0 auto 84px 5%;
+  margin: 0 auto 84px;
   text-align: left;
 }
 </style>

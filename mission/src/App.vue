@@ -23,7 +23,9 @@ export default {
 @import './assets/scss/common.scss';
 
 #app {
+  width: 95%;
   margin: 61px 0;
+  padding-left: 15px;
 
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

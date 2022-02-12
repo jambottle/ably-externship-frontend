@@ -59,13 +59,19 @@ export default {
 
 <style lang="scss" scoped>
 #card {
+  width: 95%;
+  margin-top: 15px;
+  box-shadow: 5px 5px 5px lightgray;
+  border-radius: 20px;
+  padding: 10px 5px 15px 25px;
+  cursor: pointer;
+
   a {
     text-decoration: none;
-    cursor: pointer;
 
     .item-profile {
-      width: 160px;
-      height: 160px;
+      width: 145px;
+      height: 145px;
       margin: 12px 0 8px;
       background-position: center;
       background-size: cover;
