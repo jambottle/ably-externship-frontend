@@ -7,11 +7,10 @@
         :style="`background-image: url(${profile})`"
       />
 
-      <p v-if="isDiscounted" class="item-price">
-        <b data-test="discount-rate">{{ discountRate }}%&nbsp;</b>
-        <span data-test="discount-price">{{ discountPrice }}원</span>
-      </p>
-      <p v-else class="item-price">
+      <p class="item-price">
+        <b v-if="isDiscounted" data-test="discount-rate">
+          {{ discountRate }}%
+        </b>
         <span data-test="discount-price">{{ discountPrice }}원</span>
       </p>
 

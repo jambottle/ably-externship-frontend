@@ -17,13 +17,14 @@
 
     <section class="item-info-body">
       <h2 data-test="item-name">{{ item.name }}</h2>
-      <p v-if="isDiscounted">
-        <b data-test="discount-rate">{{ discountRate }}%&nbsp;</b>
+      <p>
+        <b v-if="isDiscounted" data-test="discount-rate">
+          {{ discountRate }}%
+        </b>
         <span data-test="discount-price">{{ discountPrice }}원&nbsp;</span>
-        <del data-test="original-price">{{ originalPrice }}원</del>
-      </p>
-      <p v-else>
-        <span data-test="discount-price">{{ discountPrice }}원</span>
+        <del v-if="isDiscounted" data-test="original-price">
+          {{ originalPrice }}원
+        </del>
       </p>
 
       <h4>상품정보</h4>
