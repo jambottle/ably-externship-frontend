@@ -1,13 +1,10 @@
 <template>
-  <main id="item-list">
+  <main id="cart-list">
     <ItemListCard
       v-for="item in items"
       :key="item.product_no"
       :id="item.product_no"
       :name="item.name"
-      :desc="item.description"
-      :discount_price="item.price"
-      :original_price="item.original_price"
       :profile="item.image"
     />
   </main>
@@ -17,10 +14,10 @@
 import ItemListCard from '@/components/ItemList/Card.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
-const ItemRepository = Repository.get('item');
+const CartRepository = Repository.get('cart');
 
 export default {
-  name: 'ItemListPage',
+  name: 'CartListPage',
 
   components: {
     ItemListCard,
@@ -33,20 +30,20 @@ export default {
   },
 
   methods: {
-    async getItemList() {
-      const { data } = await ItemRepository.getItemList();
-      this.items = data.items;
+    async getCartList() {
+      const { data } = await CartRepository.getCartList();
+      this.items = data.cart_item;
     },
   },
 
   created() {
-    this.getItemList();
+    this.getCartList();
   },
 };
 </script>
 
 <style lang="scss" scoped>
-#item-list {
+#cart-list {
   display: flex;
   flex-wrap: wrap;
 

@@ -3,6 +3,7 @@
     <ItemListCard
       v-for="item in items"
       :key="item.product_no"
+      :id="item.product_no"
       :name="item.name"
       :desc="item.description"
       :discount_price="item.price"
