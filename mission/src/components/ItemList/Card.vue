@@ -59,12 +59,9 @@ export default {
 
 <style lang="scss" scoped>
 #card {
-  width: 40%;
-  margin-right: 10%;
-  cursor: pointer;
-
   a {
     text-decoration: none;
+    cursor: pointer;
 
     .item-profile {
       width: 160px;

@@ -47,13 +47,13 @@ export default {
 
 <style lang="scss" scoped>
 #item-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row;
 
-  width: 100%;
+  width: 95%;
   max-width: 512px;
-  margin: 0 auto 84px;
-  padding: 6px 0 0 16px;
+  margin: 0 auto 84px 5%;
   text-align: left;
 }
 </style>
