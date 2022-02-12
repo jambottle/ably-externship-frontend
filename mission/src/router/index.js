@@ -3,7 +3,7 @@ import ItemListPage from '@/views/ItemList.vue';
 import ItemRoutes from '@/router/ItemRoutes';
 import WishRoutes from '@/router/WishRoutes';
 import CartRoutes from '@/router/CartRoutes';
-import InfoRoutes from '@/router/InfoRoutes';
+import UserRoutes from '@/router/UserRoutes';
 
 const routes = [
   {
@@ -22,7 +22,7 @@ const routes = [
   ...ItemRoutes,
   ...WishRoutes,
   ...CartRoutes,
-  ...InfoRoutes,
+  ...UserRoutes,
 ];
 
 const router = createRouter({

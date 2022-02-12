@@ -8,7 +8,7 @@
 import ItemListCard from '@/components/ItemList/Card.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
-const WishRepository = Repository.get('info');
+const UserRepository = Repository.get('info');
 
 export default {
   name: 'UserInfoPage',
@@ -25,7 +25,7 @@ export default {
 
   methods: {
     async getUserInfo() {
-      const { data } = await WishRepository.getUserInfo();
+      const { data } = await UserRepository.getUserInfo();
       this.user = data;
     },
   },

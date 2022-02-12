@@ -1,4 +1,4 @@
-import WishListPage from '@/views/WishList.vue';
+import WishListPage from '../views/WishList.vue';
 
 export default [
   {

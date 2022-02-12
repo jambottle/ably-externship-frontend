@@ -12,7 +12,7 @@ import UserInfoPage from '@/views/UserInfo.vue';
 
 import WishRoutes from '@/router/WishRoutes';
 import CartRoutes from '@/router/CartRoutes';
-import InfoRoutes from '@/router/InfoRoutes';
+import UserRoutes from '@/router/UserRoutes';
 
 const routes = [
   {
@@ -22,7 +22,7 @@ const routes = [
   },
   ...WishRoutes,
   ...CartRoutes,
-  ...InfoRoutes,
+  ...UserRoutes,
 ];
 
 const router = createRouter({
@@ -50,9 +50,9 @@ describe('Footer.vue', () => {
     expect(listWrapper).toHaveLength(footerData.length);
 
     for (let i = 0; i < footerData.length; i += 1) {
-      const linkWrapper = listWrapper[i];
+      const iconWrapper = listWrapper[i];
 
-      expect(linkWrapper.get('[data-test="footer-router"] svg').exists()).toBe(true);
+      expect(iconWrapper.get('[data-test="footer-router"] svg').exists()).toBe(true);
     }
   });
 

@@ -1,13 +1,13 @@
 import ItemRepository from '@/repositories/ItemRepository';
 import WishRepository from '@/repositories/WishRepository';
 import CartRepository from '@/repositories/CartRepository';
-import InfoRepository from '@/repositories/InfoRepository';
+import UserRepository from '@/repositories/UserRepository';
 
 const repositories = {
   item: ItemRepository,
   wish: WishRepository,
   cart: CartRepository,
-  info: InfoRepository,
+  info: UserRepository,
 };
 
 export default {

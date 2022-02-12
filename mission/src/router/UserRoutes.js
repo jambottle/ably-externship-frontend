@@ -1,4 +1,4 @@
-import UserInfoPage from '@/views/UserInfo.vue';
+import UserInfoPage from '../views/UserInfo.vue';
 
 export default [
   {

@@ -1,5 +1,5 @@
-import ItemListPage from '@/views/ItemList.vue';
-import ItemInfoPage from '@/views/ItemInfo.vue';
+import ItemListPage from '../views/ItemList.vue';
+import ItemInfoPage from '../views/ItemInfo.vue';
 
 export default [
   {
