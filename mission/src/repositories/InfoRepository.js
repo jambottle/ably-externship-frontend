@@ -6,4 +6,7 @@ export default {
   getUserInfo() {
     return Client.get(`${resource}`);
   },
+  putUserInfo(payload, id) {
+    return Client.put(`${resource}/${id}`, payload);
+  },
 };
