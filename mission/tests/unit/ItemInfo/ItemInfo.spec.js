@@ -1,11 +1,17 @@
 import { mount } from '@vue/test-utils';
 import ItemInfoPage from '@/views/ItemInfo.vue';
+import ItemInfoReview from '@/components/ItemInfo/Review.vue';
 
 const testItemInfo = {
   name: '아이언맨 마크 42',
   description: '<p>원거리 탈착 기능이 탑재된 고성능 슈트</p>',
   price: 4000000000,
   original_price: 5000000000,
+  reviews: [
+    { writer: 'writer 1', title: 'title 1', content: 'content 1' },
+    { writer: 'writer 2', title: 'title 2', content: 'content 2' },
+    { writer: 'writer 3', title: 'title 3', content: 'content 3' },
+  ],
 };
 
 describe('ItemInfo.vue', () => {
@@ -44,6 +50,26 @@ describe('ItemInfo.vue', () => {
     });
 
     expect(wrapper.get('[data-test="item-desc"]').html()).toContain(testItemInfo.description);
+  });
+
+  it('renders multiple ItemInfoReview components', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      item: testItemInfo,
+    });
+
+    const listWrapper = wrapper.findAllComponents(ItemInfoReview);
+
+    expect(listWrapper).toHaveLength(testItemInfo.reviews.length);
+
+    for (let i = 0; i < testItemInfo.reviews.length; i += 1) {
+      const reviewWrapper = listWrapper[i];
+
+      expect(reviewWrapper.get('[data-test="review-name"]').text()).toBe(testItemInfo.reviews[i].writer);
+      expect(reviewWrapper.get('[data-test="review-title"]').text()).toBe(testItemInfo.reviews[i].title);
+      expect(reviewWrapper.get('[data-test="review-content"]').text()).toBe(testItemInfo.reviews[i].content);
+    }
   });
 
   it('shows fixed footer with a button which contains discount price', async () => {
