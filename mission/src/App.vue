@@ -1,5 +1,5 @@
 <template>
-  <AppHeader @click="$router.push({ path: '/' })" />
+  <AppHeader />
   <router-view />
   <AppFooter />
 </template>

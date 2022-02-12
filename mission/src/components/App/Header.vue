@@ -4,7 +4,9 @@
     data-test="header-wrapper"
     :class="hasScrolled ? 'hidden' : ''"
   >
-    <h1>DefJam Streetwear</h1>
+    <router-link to="/" data-test="header-router">
+      <h1>DefJam Streetwear</h1>
+    </router-link>
   </header>
 </template>
 
@@ -56,18 +58,22 @@ export default {
   border-bottom: 1px solid lightgray;
   background: white;
 
-  h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 60px;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-  }
+  a {
+    text-decoration: none;
 
-  &.hidden {
-    top: -61px;
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 60px;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+
+    &.hidden {
+      top: -61px;
+    }
   }
 }
 </style>
