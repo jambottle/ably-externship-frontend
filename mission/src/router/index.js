@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import ItemListPage from '@/views/ItemList.vue';
 import ItemRoutes from '@/router/ItemRoutes';
 import WishRoutes from '@/router/WishRoutes';
+import CartRoutes from '@/router/CartRoutes';
+import InfoRoutes from '@/router/InfoRoutes';
 
 const routes = [
   {
@@ -19,6 +21,8 @@ const routes = [
   },
   ...ItemRoutes,
   ...WishRoutes,
+  ...CartRoutes,
+  ...InfoRoutes,
 ];
 
 const router = createRouter({
