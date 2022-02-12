@@ -31,8 +31,16 @@ export default {
 
   methods: {
     async getCartList() {
-      const { data, status } = await CartRepository.getCartList();
-      if (status === 200) this.items = data.cart_item;
+      try {
+        const { data, status } = await CartRepository.getCartList();
+        if (status !== 200) {
+          throw new Error('장바구니의 목록을 조회할 수 없습니다.');
+        } else {
+          this.items = data.cart_item;
+        }
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 

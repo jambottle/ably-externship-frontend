@@ -25,8 +25,16 @@ export default {
 
   methods: {
     async getUserInfo() {
-      const { data, status } = await UserRepository.getUserInfo();
-      if (status === 200) this.user = data;
+      try {
+        const { data, status } = await UserRepository.getUserInfo();
+        if (status !== 200) {
+          throw new Error('현재 유저의 정보를 조회할 수 없습니다.');
+        } else {
+          this.user = data;
+        }
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 

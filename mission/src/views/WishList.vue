@@ -34,8 +34,16 @@ export default {
 
   methods: {
     async getWishList() {
-      const { data, status } = await WishRepository.getWishList();
-      if (status === 200) this.items = data.items;
+      try {
+        const { data, status } = await WishRepository.getWishList();
+        if (status !== 200) {
+          throw new Error('찜한 상품의 목록을 조회할 수 없습니다.');
+        } else {
+          this.items = data.items;
+        }
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 

@@ -120,9 +120,17 @@ export default {
 
   methods: {
     async getItemInfo() {
-      const { itemNo } = this.$route.params;
-      const { data, status } = await ItemRepository.getItemInfo(itemNo);
-      if (status === 200) this.item = data.item;
+      try {
+        const { itemNo } = this.$route.params;
+        const { data, status } = await ItemRepository.getItemInfo(itemNo);
+        if (status !== 200) {
+          throw new Error('해당 상품의 정보를 조회할 수 없습니다.');
+        } else {
+          this.item = data.item;
+        }
+      } catch (err) {
+        console.error(err);
+      }
     },
     toggleLike() {
       this.item.seller.isLiked = !this.item.seller.isLiked;
