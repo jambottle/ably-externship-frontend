@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import ItemListPage from '@/views/ItemList.vue';
-import ItemInfoPage from '@/views/ItemInfo.vue';
-import WishListPage from '@/views/WishList.vue';
+import ItemRoutes from '@/router/ItemRoutes';
+import WishRoutes from '@/router/WishRoutes';
 
 const routes = [
   {
@@ -10,23 +10,15 @@ const routes = [
     component: ItemListPage,
   },
   {
-    path: '/item',
-    name: 'ItemListPage',
-    component: ItemListPage,
-    meta: { title: '상품 목록 조회' },
+    path: '/about',
+    name: 'About',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
-  {
-    path: '/item/:itemNo',
-    name: 'ItemInfoPage',
-    component: ItemInfoPage,
-    meta: { title: '상품 상세 정보 조회' },
-  },
-  {
-    path: '/wish',
-    name: 'WishListPage',
-    component: WishListPage,
-    meta: { title: '찜한 상품 목록 조회' },
-  },
+  ...ItemRoutes,
+  ...WishRoutes,
 ];
 
 const router = createRouter({
