@@ -25,8 +25,8 @@ export default {
 
   methods: {
     async getUserInfo() {
-      const { data } = await UserRepository.getUserInfo();
-      this.user = data;
+      const { data, status } = await UserRepository.getUserInfo();
+      if (status === 200) this.user = data;
     },
   },
 

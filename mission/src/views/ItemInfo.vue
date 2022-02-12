@@ -121,8 +121,8 @@ export default {
   methods: {
     async getItemInfo() {
       const { itemNo } = this.$route.params;
-      const { data } = await ItemRepository.getItemInfo(itemNo);
-      this.item = data.item;
+      const { data, status } = await ItemRepository.getItemInfo(itemNo);
+      if (status === 200) this.item = data.item;
     },
     toggleLike() {
       this.item.seller.isLiked = !this.item.seller.isLiked;

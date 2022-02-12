@@ -34,8 +34,8 @@ export default {
 
   methods: {
     async getItemList() {
-      const { data } = await ItemRepository.getItemList();
-      this.items = data.items;
+      const { data, status } = await ItemRepository.getItemList();
+      if (status === 200) this.items = data.items;
     },
   },
 

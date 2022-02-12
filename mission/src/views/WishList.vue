@@ -34,8 +34,8 @@ export default {
 
   methods: {
     async getWishList() {
-      const { data } = await WishRepository.getWishList();
-      this.items = data.items;
+      const { data, status } = await WishRepository.getWishList();
+      if (status === 200) this.items = data.items;
     },
   },
 

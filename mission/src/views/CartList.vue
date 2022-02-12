@@ -31,8 +31,8 @@ export default {
 
   methods: {
     async getCartList() {
-      const { data } = await CartRepository.getCartList();
-      this.items = data.cart_item;
+      const { data, status } = await CartRepository.getCartList();
+      if (status === 200) this.items = data.cart_item;
     },
   },
 
