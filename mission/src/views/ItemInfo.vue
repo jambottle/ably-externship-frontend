@@ -47,7 +47,7 @@
         @click="showModal"
       >
         🛒 <strong>{{ discountPrice }}</strong
-        >원 구매
+        >원
       </button>
     </footer>
 

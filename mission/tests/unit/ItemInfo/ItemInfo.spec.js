@@ -95,7 +95,7 @@ describe('ItemInfo.vue', () => {
     });
 
     expect(wrapper.get('[data-test="footer-wrapper"]').exists()).toBe(true);
-    expect(wrapper.get('[data-test="footer-button"]').text()).toBe(`${testItemInfo.price.toLocaleString()}원 구매`);
+    expect(wrapper.get('[data-test="footer-button"]').text()).toContain(`${testItemInfo.price.toLocaleString()}원`);
   });
 
   it('shows modal with name and price of item by click event', async () => {
