@@ -30,7 +30,7 @@ describe('Header.vue', () => {
     expect(wrapper.get('[data-test="header-router"] h1').exists()).toBe(true);
   });
 
-  it('routes to ItemListPage when linked title is clicked', async () => {
+  it('routes to home page & renders ItemListPage when linked title is clicked', async () => {
     router.push('/');
     await router.isReady();
 
