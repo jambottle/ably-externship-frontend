@@ -66,7 +66,7 @@ export default {
 #cart-list {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(1, 100%);
+  grid-template-columns: repeat(1, 95%);
   grid-auto-flow: row;
 
   max-width: 512px;

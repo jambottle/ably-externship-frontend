@@ -60,7 +60,7 @@ export default {
 
 <style lang="scss" scoped>
 #card {
-  width: 90%;
+  width: 100%;
   margin-top: 15px;
   border-radius: 20px;
   box-shadow: 5px 5px 5px lightgray;
