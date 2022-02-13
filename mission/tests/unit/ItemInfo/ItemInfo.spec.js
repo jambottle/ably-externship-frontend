@@ -1,6 +1,8 @@
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
+
 import ItemInfoPage from '@/views/ItemInfo.vue';
 import ItemInfoReview from '@/components/ItemInfo/Review.vue';
+import ItemRepository from '@/repositories/ItemRepository';
 
 const testItemInfo = {
   name: '아이언맨 마크 42',
@@ -15,6 +17,19 @@ const testItemInfo = {
 };
 
 describe('ItemInfo.vue', () => {
+  it('calls API to get item\'s info', async () => {
+    const response = {
+      data: { item: testItemInfo },
+    };
+
+    ItemRepository.getItemInfo = jest.fn().mockResolvedValue(response);
+
+    await ItemRepository.getItemInfo();
+    await flushPromises();
+
+    expect(ItemRepository.getItemInfo).toHaveBeenCalledTimes(1);
+  });
+
   it('renders profile image of item', () => {
     const wrapper = mount(ItemInfoPage);
 

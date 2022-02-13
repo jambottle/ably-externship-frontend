@@ -1,6 +1,8 @@
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
+
 import ItemListPage from '@/views/ItemList.vue';
 import ItemListCard from '@/components/ItemList/Card.vue';
+import ItemRepository from '@/repositories/ItemRepository';
 
 const testItemList = [
   { name: 'name 1', description: 'description 1', price: 13400 },
@@ -9,6 +11,19 @@ const testItemList = [
 ];
 
 describe('ItemList.vue', () => {
+  it('calls API to get items\' list', async () => {
+    const response = {
+      data: { items: testItemList },
+    };
+
+    ItemRepository.getItemList = jest.fn().mockResolvedValue(response);
+
+    await ItemRepository.getItemList();
+    await flushPromises();
+
+    expect(ItemRepository.getItemList).toHaveBeenCalledTimes(1);
+  });
+
   it('renders multiple ItemListCard components', async () => {
     const wrapper = mount(ItemListPage);
 
