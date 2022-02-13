@@ -40,11 +40,13 @@
 
     <footer class="item-info-footer" data-test="footer-wrapper">
       <button
-        class="w3-round-large w3-black w3-xlarge w3-padding-small"
+        class="
+          w3-orange w3-xlarge w3-round-large w3-padding-small w3-text-white
+        "
         data-test="footer-button"
         @click="showModal"
       >
-        <strong>{{ discountPrice }}</strong
+        🛒 <strong>{{ discountPrice }}</strong
         >원 구매
       </button>
     </footer>
