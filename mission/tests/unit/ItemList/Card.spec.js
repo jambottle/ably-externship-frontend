@@ -30,7 +30,11 @@ const testItemInfo = {
 
 describe('Card.vue', () => {
   it('renders profile image, name, discount rate and price of item', async () => {
-    const wrapper = mount(ItemListCard);
+    const wrapper = mount(ItemListCard, {
+      global: {
+        plugins: [router],
+      },
+    });
 
     await wrapper.setProps({
       ...testItemInfo,

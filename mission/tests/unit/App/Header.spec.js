@@ -20,7 +20,11 @@ const router = createRouter({
 
 describe('Header.vue', () => {
   it('renders header element with linked title', () => {
-    const wrapper = mount(AppHeader);
+    const wrapper = mount(AppHeader, {
+      global: {
+        plugins: [router],
+      },
+    });
 
     expect(wrapper.get('[data-test="header-wrapper"]').exists()).toBe(true);
     expect(wrapper.get('[data-test="header-router"] h1').exists()).toBe(true);

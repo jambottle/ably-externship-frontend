@@ -1,8 +1,24 @@
 import { mount, flushPromises } from '@vue/test-utils';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import ItemListPage from '@/views/ItemList.vue';
 import ItemListCard from '@/components/ItemList/Card.vue';
 import ItemRepository from '@/repositories/ItemRepository';
+import ItemRoutes from '@/router/ItemRoutes';
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: ItemListPage,
+  },
+  ...ItemRoutes,
+];
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
+});
 
 const testItemList = [
   { name: 'name 1', description: 'description 1', price: 13400 },
@@ -25,7 +41,14 @@ describe('ItemList.vue', () => {
   });
 
   it('renders multiple ItemListCard components', async () => {
-    const wrapper = mount(ItemListPage);
+    router.push('/');
+    await router.isReady();
+
+    const wrapper = mount(ItemListPage, {
+      global: {
+        plugins: [router],
+      },
+    });
 
     await wrapper.setData({
       items: testItemList,
