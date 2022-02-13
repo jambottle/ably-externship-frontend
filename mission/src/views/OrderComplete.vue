@@ -37,7 +37,7 @@ export default {
 
   a {
     width: 100%;
-    max-width: 150px;
+    max-width: 125px;
     margin: 15px auto 0;
     text-decoration: none;
 
