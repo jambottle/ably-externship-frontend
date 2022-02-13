@@ -31,15 +31,23 @@ const router = createRouter({
 });
 
 describe('Footer.vue', () => {
-  it('renders nav element with linked icons', () => {
-    const wrapper = mount(AppFooter);
+  it('renders nav element with linked icons', async () => {
+    const wrapper = mount(AppFooter, {
+      global: {
+        plugins: [router],
+      },
+    });
 
     expect(wrapper.get('[data-test="footer-wrapper"]').exists()).toBe(true);
     expect(wrapper.get('[data-test="footer-router"] svg').exists()).toBe(true);
   });
 
   it('renders multiple navigation icons', async () => {
-    const wrapper = mount(AppFooter);
+    const wrapper = mount(AppFooter, {
+      global: {
+        plugins: [router],
+      },
+    });
 
     await wrapper.setData({
       links: footerData,
