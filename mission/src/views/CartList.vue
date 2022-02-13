@@ -1,17 +1,20 @@
 <template>
   <main id="cart-list">
-    <ItemListCard
+    <CartListCard
       v-for="item in items"
       :key="item.product_no"
       :id="item.product_no"
       :name="item.name"
+      :desc="item.description"
+      :discount_price="item.price"
+      :original_price="item.original_price"
       :profile="item.image"
     />
   </main>
 </template>
 
 <script>
-import ItemListCard from '@/components/ItemList/Card.vue';
+import CartListCard from '@/components/CartList/Card.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
 const CartRepository = Repository.get('cart');
@@ -20,7 +23,7 @@ export default {
   name: 'CartListPage',
 
   components: {
-    ItemListCard,
+    CartListCard,
   },
 
   data() {
@@ -52,13 +55,13 @@ export default {
 
 <style lang="scss" scoped>
 #cart-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(1, 100%);
+  grid-auto-flow: row;
 
-  width: 100%;
   max-width: 512px;
   margin: 0 auto 84px;
-  padding: 6px 0 0 16px;
   text-align: left;
 }
 </style>

@@ -7,22 +7,24 @@
         :style="`background-image: url(${profile})`"
       />
 
-      <p class="item-price">
-        <b v-if="isDiscounted" data-test="discount-rate">
-          {{ discountRate }}%
-        </b>
-        <span data-test="discount-price">{{ discountPrice }}원</span>
-      </p>
+      <div>
+        <p class="item-price">
+          <b v-if="isDiscounted" data-test="discount-rate">
+            {{ discountRate }}%
+          </b>
+          <span data-test="discount-price">{{ discountPrice }}원</span>
+        </p>
 
-      <h2 class="item-name" data-test="item-name">{{ name }}</h2>
-      <p class="item-desc" data-test="item-desc">{{ desc }}</p>
+        <h2 class="item-name" data-test="item-name">{{ name }}</h2>
+        <p class="item-desc" data-test="item-desc">{{ desc }}</p>
+      </div>
     </router-link>
   </article>
 </template>
 
 <script>
 export default {
-  name: 'ItemListCard',
+  name: 'CartListCard',
 
   props: {
     id: { type: String, default: '' },
@@ -58,19 +60,24 @@ export default {
 
 <style lang="scss" scoped>
 #card {
-  width: 100%;
+  width: 90%;
   margin-top: 15px;
   border-radius: 20px;
   box-shadow: 5px 5px 5px lightgray;
-  padding: 10px 20px 15px;
+  padding: 10px 5px 15px 25px;
   cursor: pointer;
 
   a {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 50%);
+    grid-auto-flow: row;
+
     text-decoration: none;
 
     .item-profile {
-      width: 140px;
-      height: 140px;
+      width: 150px;
+      height: 150px;
       margin: 12px 0 8px;
       background-position: center;
       background-size: cover;

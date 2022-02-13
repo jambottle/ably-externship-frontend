@@ -57,7 +57,7 @@ export default {
 #item-list {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(2, 50%);
+  grid-template-columns: repeat(2, 45%);
   grid-auto-flow: row;
 
   max-width: 512px;

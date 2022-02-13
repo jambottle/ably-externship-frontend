@@ -23,7 +23,7 @@ export default {
 @import './assets/scss/common.scss';
 
 #app {
-  width: 95%;
+  width: 97.5%;
   margin: 61px 0;
   padding-left: 15px;
 
