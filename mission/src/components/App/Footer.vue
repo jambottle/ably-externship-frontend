@@ -1,7 +1,17 @@
 <template>
   <nav id="footer" data-test="footer-wrapper">
-    <router-link v-for="link in links" :key="link.id" :to="link.url">
-      <FontAwesomeIcon :icon="link.icon" /><br />
+    <router-link
+      v-for="link in links"
+      :key="link.id"
+      :to="link.url"
+      data-test="footer-router"
+    >
+      <FontAwesomeIcon
+        :icon="link.icon"
+        :data-test="`footer-router-${link.id}`"
+        :style="{ color: setIconActive(link.url) }"
+      />
+      <br />
       {{ link.name }}
     </router-link>
   </nav>
@@ -12,7 +22,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import footerData from '@/assets/footerData';
 
 export default {
-  name: 'ItemListFooter',
+  name: 'AppFooter',
 
   components: {
     FontAwesomeIcon,
@@ -22,6 +32,12 @@ export default {
     return {
       links: footerData,
     };
+  },
+
+  methods: {
+    setIconActive(url) {
+      return this.$route.path === url ? '#fd7e14' : 'inherit';
+    },
   },
 };
 </script>

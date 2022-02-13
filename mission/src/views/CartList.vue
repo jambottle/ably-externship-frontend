@@ -1,13 +1,10 @@
 <template>
-  <main id="item-list">
+  <main id="cart-list">
     <ItemListCard
       v-for="item in items"
       :key="item.product_no"
       :id="item.product_no"
       :name="item.name"
-      :desc="item.description"
-      :discount_price="item.price"
-      :original_price="item.original_price"
       :profile="item.image"
     />
   </main>
@@ -17,10 +14,10 @@
 import ItemListCard from '@/components/ItemList/Card.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
-const ItemRepository = Repository.get('item');
+const CartRepository = Repository.get('cart');
 
 export default {
-  name: 'ItemListPage',
+  name: 'CartListPage',
 
   components: {
     ItemListCard,
@@ -33,13 +30,13 @@ export default {
   },
 
   methods: {
-    async getItemList() {
+    async getCartList() {
       try {
-        const { data, status } = await ItemRepository.getItemList();
+        const { data, status } = await CartRepository.getCartList();
         if (status !== 200) {
-          throw new Error('현재 상품의 목록을 조회할 수 없습니다.');
+          throw new Error('장바구니의 목록을 조회할 수 없습니다.');
         } else {
-          this.items = data.items;
+          this.items = data.cart_item;
         }
       } catch (err) {
         console.error(err);
@@ -48,20 +45,20 @@ export default {
   },
 
   created() {
-    this.getItemList();
+    this.getCartList();
   },
 };
 </script>
 
 <style lang="scss" scoped>
-#item-list {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(2, 50%);
-  grid-auto-flow: row;
+#cart-list {
+  display: flex;
+  flex-wrap: wrap;
 
+  width: 100%;
   max-width: 512px;
   margin: 0 auto 84px;
+  padding: 6px 0 0 16px;
   text-align: left;
 }
 </style>

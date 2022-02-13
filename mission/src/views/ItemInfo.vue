@@ -4,29 +4,36 @@
       <div
         class="item-profile"
         data-test="item-profile"
-        :style="`background-image: url(${item.profile})`"
+        :style="`background-image: url(${item.image})`"
       />
-      <ItemInfoShop :shop="shop" @toggleLike="toggleLike" />
+      <ItemInfoShop
+        :name="item.seller.name"
+        :tags="item.seller.hash_tags"
+        :profile="item.seller.profile_image"
+        :isLiked="item.seller.isLiked"
+        @toggleLike="toggleLike"
+      />
     </figure>
 
     <section class="item-info-body">
       <h2 data-test="item-name">{{ item.name }}</h2>
-      <p v-if="isDiscounted">
-        <b data-test="discount-rate">{{ discountRate }}%&nbsp;</b>
+      <p>
+        <b v-if="isDiscounted" data-test="discount-rate">
+          {{ discountRate }}%
+        </b>
         <span data-test="discount-price">{{ discountPrice }}원&nbsp;</span>
-        <del data-test="original-price">{{ originalPrice }}원</del>
-      </p>
-      <p v-else>
-        <span data-test="discount-price">{{ discountPrice }}원</span>
+        <del v-if="isDiscounted" data-test="original-price">
+          {{ originalPrice }}원
+        </del>
       </p>
 
       <h4>상품정보</h4>
-      <p v-html="item.desc" data-test="item-desc" />
+      <p v-html="item.description" data-test="item-desc" />
 
-      <h4>리뷰 ({{ reviews.length }})</h4>
+      <h4>리뷰 ({{ item.reviews.length }})</h4>
       <ItemInfoReview
-        v-for="review in reviews"
-        :key="review.post.id"
+        v-for="review in item.reviews"
+        :key="review.review_no"
         :review="review"
       />
     </section>
@@ -57,14 +64,15 @@
 </template>
 
 <script>
-import itemData from '@/assets/itemData';
-import reviewData from '@/assets/reviewData';
 import ItemInfoShop from '@/components/ItemInfo/Shop.vue';
 import ItemInfoReview from '@/components/ItemInfo/Review.vue';
 import Modal from '@/components/Modal.vue';
+import Repository from '@/repositories/RepositoryFactory';
+
+const ItemRepository = Repository.get('item');
 
 export default {
-  name: 'ItemInfo',
+  name: 'ItemInfoPage',
 
   components: {
     ItemInfoShop,
@@ -74,35 +82,67 @@ export default {
 
   data() {
     return {
-      ...itemData,
-      reviews: reviewData,
+      item: {
+        product_no: '',
+        name: '',
+        description: '',
+        price: 0,
+        original_price: 0,
+        image: '',
+        seller: {
+          seller_no: 0,
+          name: '',
+          hash_tags: [],
+          profile_image: '',
+          isLiked: false,
+        },
+        reviews: [],
+        isLiked: false,
+      },
       isModalShown: false,
     };
   },
 
   computed: {
     isDiscounted() {
-      return this.item.price.discount !== this.item.price.original;
+      return this.item.price !== this.item.original_price;
     },
     discountRate() {
-      const rate = 1 - this.item.price.discount / this.item.price.original;
+      const rate = 1 - this.item.price / this.item.original_price;
       return Math.round(rate * 100);
     },
     discountPrice() {
-      return this.item.price.discount.toLocaleString();
+      return this.item.price.toLocaleString();
     },
     originalPrice() {
-      return this.item.price.original.toLocaleString();
+      return this.item.original_price.toLocaleString();
     },
   },
 
   methods: {
+    async getItemInfo() {
+      try {
+        const { itemNo } = this.$route.params;
+        const { data, status } = await ItemRepository.getItemInfo(itemNo);
+        if (status !== 200) {
+          throw new Error('해당 상품의 정보를 조회할 수 없습니다.');
+        } else {
+          this.item = data.item;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
     toggleLike() {
-      this.shop.isLiked = !this.shop.isLiked;
+      this.item.seller.isLiked = !this.item.seller.isLiked;
     },
     showModal() {
       this.isModalShown = true;
     },
+  },
+
+  created() {
+    this.getItemInfo();
   },
 };
 </script>
@@ -131,7 +171,7 @@ export default {
   }
 
   .item-info-body {
-    margin-bottom: 84px;
+    margin-bottom: 150px;
     padding: 6px 16px 0;
     text-align: left;
 
@@ -165,7 +205,7 @@ export default {
   .item-info-footer {
     position: fixed;
     z-index: 5;
-    bottom: 0;
+    bottom: 61px;
     left: 50%;
     transform: translate(-50%, 0);
 

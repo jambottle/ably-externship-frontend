@@ -1,15 +1,15 @@
 <template>
   <article id="review">
     <div class="review-post">
-      <b data-test="review-name">{{ review.user.name }}</b>
-      <span data-test="review-date">{{ review.post.date }}</span>
-      <h6 data-test="review-title">{{ review.post.title }}</h6>
-      <p data-test="review-content">{{ review.post.content }}</p>
+      <b data-test="review-name">{{ review.writer }}</b>
+      <span data-test="review-date">{{ review.created }}</span>
+      <h6 data-test="review-title">{{ review.title }}</h6>
+      <p data-test="review-content">{{ review.content }}</p>
     </div>
     <div
       class="review-photo"
       data-test="review-photo"
-      :style="`background-image: url(${review.post.photo})`"
+      :style="`background-image: url(${review.img})`"
     />
   </article>
 </template>
@@ -19,7 +19,18 @@ export default {
   name: 'ItemInfoReview',
 
   props: {
-    review: Object,
+    review: {
+      type: Object,
+      default() {
+        return {
+          writer: String,
+          title: String,
+          content: String,
+          created: String,
+          img: String,
+        };
+      },
+    },
   },
 };
 </script>
