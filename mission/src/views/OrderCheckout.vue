@@ -1,6 +1,6 @@
 <template>
   <main id="order-checkout">
-    <h3>주문/결제</h3>
+    <h3>🧾 주문/결제</h3>
 
     <h4>주문 목록</h4>
     <hr />
@@ -96,9 +96,21 @@ export default {
   padding: 12px 16px 0;
   text-align: left;
 
-  h3,
+  h3 {
+    position: relative;
+    left: -10px;
+
+    width: calc(100% + 10px);
+    margin-bottom: 8px;
+    padding: 2px 8px;
+
+    background-color: orange;
+    color: white;
+    font-weight: 600;
+  }
+
   h4 {
-    margin-top: 10px;
+    margin-bottom: 8px;
     font-weight: 600;
   }
 
@@ -128,18 +140,21 @@ export default {
       input {
         &[type='text'] {
           width: 80%;
-          padding-left: 8px;
+          margin: 2px 0;
+          border: 1px solid darkgray;
+          border-radius: 4px;
+          padding: 2px 8px;
           font-size: 16px;
           font-weight: normal;
         }
 
         &[type='radio'] {
-          width: 5%;
           margin: 10px 5px;
         }
       }
 
       span {
+        margin-right: 10px;
         font-weight: normal;
 
         &[role='alert'] {
@@ -152,7 +167,7 @@ export default {
     a {
       width: 100%;
       max-width: 125px;
-      margin: 5px auto 0;
+      margin: 0 auto;
       text-decoration: none;
 
       button {
