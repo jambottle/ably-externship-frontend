@@ -1,18 +1,18 @@
 <template>
-  <main id="order-checkout">
+  <main id="order-checkout" data-test="order-wrapper">
     <h3>🧾 주문/결제</h3>
 
     <h4>주문 목록</h4>
     <hr />
     <ul>
-      <li>핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
-      <li>핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
-      <li>핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
+      <li data-test="order-item">핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
+      <li data-test="order-item">핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
+      <li data-test="order-item">핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
     </ul>
 
     <h4>결제 정보</h4>
     <hr />
-    <Form data-test="order-form" @submit="onSubmit">
+    <Form @submit="onSubmit" data-test="order-form">
       <label>
         이름<br />
         <Field type="text" name="username" :rules="validateText" />
@@ -47,10 +47,9 @@
         <span>계좌이체</span>
       </label>
 
-      <router-link to="/order/complete">
+      <router-link to="/order/complete" data-test="order-router">
         <button
           class="w3-lightgray w3-large w3-round-large w3-border-0 w3-padding"
-          data-test="order-button"
         >
           <strong>💳 결제하기</strong>
         </button>
