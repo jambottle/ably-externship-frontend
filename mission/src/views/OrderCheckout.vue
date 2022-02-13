@@ -4,61 +4,84 @@
 
     <h4>주문 목록</h4>
     <hr />
-    <p>
-      <span>핏이 좋은 수트 포함 1건 / 198,000원<br /></span>
-      <span>핏이 좋은 수트 포함 1건 / 198,000원<br /></span>
-      <span>핏이 좋은 수트 포함 1건 / 198,000원<br /></span>
-    </p>
+    <ul>
+      <li>핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
+      <li>핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
+      <li>핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
+    </ul>
 
     <h4>결제 정보</h4>
     <hr />
-    <form data-test="order-form">
+    <Form data-test="order-form" @submit="onSubmit">
       <label>
         이름<br />
-        <input type="text" />
+        <Field type="text" name="username" :rules="validateText" />
+        <br /><ErrorMessage name="username" />
       </label>
 
       <label>
         연락처<br />
-        <input type="text" />
+        <Field type="text" name="contact" :rules="validateText" />
+        <br /><ErrorMessage name="contact" />
       </label>
 
       <label>
         배송지 주소<br />
-        <input type="text" />
+        <Field type="text" name="address" :rules="validateText" />
+        <br /><ErrorMessage name="address" />
       </label>
 
       <label>
         배송 방법<br />
-        <input type="radio" name="shipping" value="package" />
+        <Field type="radio" name="shipping" value="package" />
         <span>택배</span>
-        <input type="radio" name="shipping" value="courier" />
+        <Field type="radio" name="shipping" value="courier" />
         <span>퀵 배송</span>
       </label>
 
       <label>
         결제 방법<br />
-        <input type="radio" name="payment" value="card" />
+        <Field type="radio" name="payment" value="card" />
         <span>신용/체크카드</span>
-        <input type="radio" name="payment" value="cash" />
+        <Field type="radio" name="payment" value="cash" />
         <span>계좌이체</span>
       </label>
-    </form>
 
-    <router-link to="/order/complete">
-      <button
-        class="w3-lightgray w3-large w3-round-large w3-border-0 w3-padding"
-        data-test="order-button"
-      >
-        <strong>💳 결제하기</strong>
-      </button>
-    </router-link>
+      <router-link to="/order/complete">
+        <button
+          class="w3-lightgray w3-large w3-round-large w3-border-0 w3-padding"
+          data-test="order-button"
+        >
+          <strong>💳 결제하기</strong>
+        </button>
+      </router-link>
+    </Form>
   </main>
 </template>
 
 <script>
+import { Field, Form, ErrorMessage } from 'vee-validate';
+
 export default {
   name: 'OrderCheckoutPage',
+
+  components: {
+    Field,
+    Form,
+    ErrorMessage,
+  },
+
+  methods: {
+    onSubmit(values) {
+      console.log(JSON.stringify(values, null, 2));
+    },
+    validateText(value) {
+      if (!value || value.trim() === '') {
+        return '이 항목은 필수 입력 항목입니다.';
+      }
+      return true;
+    },
+  },
 };
 </script>
 
@@ -83,10 +106,10 @@ export default {
     margin: 0 0 10px;
   }
 
-  p {
+  ul {
     margin-bottom: 10px;
 
-    span {
+    li {
       font-size: 18px;
     }
   }
@@ -105,6 +128,9 @@ export default {
       input {
         &[type='text'] {
           width: 80%;
+          padding-left: 8px;
+          font-size: 16px;
+          font-weight: normal;
         }
 
         &[type='radio'] {
@@ -115,25 +141,30 @@ export default {
 
       span {
         font-weight: normal;
+
+        &[role='alert'] {
+          color: darkblue;
+          font-size: 14px;
+        }
       }
     }
-  }
 
-  a {
-    width: 100%;
-    max-width: 125px;
-    margin: 5px auto 0;
-    text-decoration: none;
+    a {
+      width: 100%;
+      max-width: 125px;
+      margin: 5px auto 0;
+      text-decoration: none;
 
-    button {
-      display: block;
-      margin: 8px auto;
-      border: 0;
-      box-shadow: 4px 4px lightgray;
-      cursor: pointer;
+      button {
+        display: block;
+        margin: 8px auto;
+        border: 0;
+        box-shadow: 4px 4px lightgray;
+        cursor: pointer;
 
-      strong {
-        font-weight: 600;
+        strong {
+          font-weight: 600;
+        }
       }
     }
   }
