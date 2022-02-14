@@ -5,7 +5,7 @@
     :class="hasScrolled ? 'hidden' : ''"
   >
     <router-link to="/" data-test="header-router">
-      <h1>DefJam Streetwear</h1>
+      <h1>{{ $store.state.siteName }}</h1>
     </router-link>
   </header>
 </template>
