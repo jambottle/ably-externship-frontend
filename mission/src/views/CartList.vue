@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 import CartListCard from '@/components/CartList/Card.vue';
 
 export default {
@@ -35,14 +35,6 @@ export default {
 
   computed: {
     ...mapState(['cartList']),
-  },
-
-  methods: {
-    ...mapActions(['getCartList']),
-  },
-
-  created() {
-    this.getCartList();
   },
 };
 </script>

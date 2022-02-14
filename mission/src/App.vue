@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import AppHeader from '@/components/App/Header.vue';
 import AppFooter from '@/components/App/Footer.vue';
 
@@ -14,6 +15,14 @@ export default {
   components: {
     AppHeader,
     AppFooter,
+  },
+
+  methods: {
+    ...mapActions(['getCartList']),
+  },
+
+  created() {
+    this.getCartList();
   },
 };
 </script>
