@@ -5,9 +5,13 @@
     <h4>주문 목록</h4>
     <hr />
     <ul>
-      <li data-test="order-item">핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
-      <li data-test="order-item">핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
-      <li data-test="order-item">핏이 좋은 수트 포함 1건 / 198,000원<br /></li>
+      <li
+        v-for="item in cartList"
+        :key="item.product_no"
+        data-test="order-item"
+      >
+        ▸ {{ item.name }} / 1EA / {{ item.price.toLocaleString() }}원<br />
+      </li>
     </ul>
 
     <h4>결제 정보</h4>
@@ -59,6 +63,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 
 export default {
@@ -68,6 +73,10 @@ export default {
     Field,
     Form,
     ErrorMessage,
+  },
+
+  computed: {
+    ...mapState(['cartList']),
   },
 
   methods: {
