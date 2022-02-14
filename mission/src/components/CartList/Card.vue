@@ -103,14 +103,6 @@ export default {
       font-size: 18px;
       font-weight: bold;
     }
-
-    .item-desc {
-      width: 180px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 16px;
-    }
   }
 }
 </style>

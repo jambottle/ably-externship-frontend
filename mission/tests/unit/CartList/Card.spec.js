@@ -44,7 +44,6 @@ describe('Card.vue', () => {
     expect(wrapper.get('[data-test="discount-rate"]').text()).toBe(`${Math.round((1 - (testItemInfo.discount_price / testItemInfo.original_price)) * 100)}%`);
     expect(wrapper.get('[data-test="discount-price"]').text()).toBe(`${testItemInfo.discount_price.toLocaleString()}원`);
     expect(wrapper.get('[data-test="item-name"]').text()).toBe(testItemInfo.name);
-    expect(wrapper.get('[data-test="item-desc"]').text()).toBe(testItemInfo.desc);
   });
 
   it('routes to ItemInfoPage when the card is clicked', async () => {
