@@ -50,7 +50,7 @@ export default {
 <style lang="scss" scoped>
 #cart-list {
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 5px;
   grid-template-columns: repeat(1, 95%);
   grid-auto-flow: row;
 
@@ -61,7 +61,7 @@ export default {
   a {
     width: 100%;
     max-width: 150px;
-    margin: 15px auto 0;
+    margin: 5px auto 0;
     text-decoration: none;
 
     button {
