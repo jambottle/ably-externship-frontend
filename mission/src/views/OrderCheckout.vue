@@ -28,7 +28,7 @@
 
       <label>
         연락처<br />
-        <Field type="text" name="contact" :rules="validateText" />
+        <Field type="text" name="contact" :rules="validateContact" />
         <br /><ErrorMessage name="contact" />
       </label>
 
@@ -90,6 +90,16 @@ export default {
     validateText(value) {
       if (!value || value.trim() === '') {
         return '이 항목은 필수 입력 항목입니다.';
+      }
+      return true;
+    },
+    validateContact(value) {
+      if (!value) {
+        return '이 항목은 필수 입력 항목입니다.';
+      }
+      const regex = /^\d{3}-\d{3,4}-\d{4}$/;
+      if (!regex.test(value)) {
+        return '010-0000-0000의 형태로 입력 바랍니다.';
       }
       return true;
     },
