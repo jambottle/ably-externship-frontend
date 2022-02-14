@@ -16,7 +16,6 @@
         </p>
 
         <h2 class="item-name" data-test="item-name">{{ name }}</h2>
-        <p class="item-desc" data-test="item-desc">{{ desc }}</p>
       </div>
     </router-link>
   </article>
