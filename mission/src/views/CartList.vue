@@ -1,7 +1,7 @@
 <template>
   <main id="cart-list">
     <CartListCard
-      v-for="item in items"
+      v-for="item in cartList"
       :key="item.product_no"
       :id="item.product_no"
       :name="item.name"
@@ -23,10 +23,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import CartListCard from '@/components/CartList/Card.vue';
-import Repository from '@/repositories/RepositoryFactory';
-
-const CartRepository = Repository.get('cart');
 
 export default {
   name: 'CartListPage',
@@ -35,25 +33,12 @@ export default {
     CartListCard,
   },
 
-  data() {
-    return {
-      items: [],
-    };
+  computed: {
+    ...mapState(['cartList']),
   },
 
   methods: {
-    async getCartList() {
-      try {
-        const { data, status } = await CartRepository.getCartList();
-        if (status !== 200) {
-          throw new Error('장바구니의 목록을 조회할 수 없습니다.');
-        } else {
-          this.items = data.cart_item;
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    },
+    ...mapActions(['getCartList']),
   },
 
   created() {
