@@ -13,6 +13,9 @@
         ▸ {{ item.name }} / 1EA / {{ item.price.toLocaleString() }}원<br />
       </li>
     </ul>
+    <p>
+      💰 총 결제 금액: <strong>{{ cartTotalPrice.toLocaleString() }}원</strong>
+    </p>
 
     <h4>결제 정보</h4>
     <hr />
@@ -63,7 +66,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 
 export default {
@@ -77,6 +80,7 @@ export default {
 
   computed: {
     ...mapState(['cartList']),
+    ...mapGetters(['cartTotalPrice']),
   },
 
   methods: {
@@ -131,6 +135,14 @@ export default {
 
     li {
       font-size: 18px;
+    }
+  }
+
+  p {
+    font-size: 18px;
+
+    strong {
+      font-weight: bold;
     }
   }
 
