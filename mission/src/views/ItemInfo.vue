@@ -44,15 +44,18 @@
           w3-orange w3-xlarge w3-round-large w3-padding-small w3-text-white
         "
         data-test="footer-button"
-        @click="showModal"
+        @click="showModal(), postCartItem(item)"
       >
         🛒 <strong>{{ discountPrice }}</strong
-        >원
+        >원에 담기
       </button>
     </footer>
 
     <transition name="modal">
-      <Modal v-if="isModalShown" @close="isModalShown = false">
+      <Modal
+        v-if="isModalShown"
+        @close="(isModalShown = false), this.$router.push('/cart')"
+      >
         <template v-slot:header>
           <h6>상품이 장바구니에 담겼습니다!</h6>
         </template>
@@ -66,6 +69,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import ItemInfoShop from '@/components/ItemInfo/Shop.vue';
 import ItemInfoReview from '@/components/ItemInfo/Review.vue';
 import Modal from '@/components/Modal.vue';
@@ -122,6 +126,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['postCartItem']),
     async getItemInfo() {
       try {
         const { itemNo } = this.$route.params;

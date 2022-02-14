@@ -25,6 +25,9 @@ export default createStore({
     setCartList(state, payload) {
       state.cartList = payload;
     },
+    postCartItem(state, payload) {
+      state.cartList.push(payload);
+    },
   },
 
   actions: {
