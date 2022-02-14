@@ -53,7 +53,7 @@ export default {
   a {
     width: 100%;
     max-width: 150px;
-    margin: 5px auto 0;
+    margin: 0 auto;
     text-decoration: none;
 
     button {
