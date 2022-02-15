@@ -14,9 +14,7 @@ export default createStore({
   getters: {
     cartTotalPrice(state) {
       let sum = 0;
-      for (let i = 0; i < state.cartList.length; i += 1) {
-        sum += state.cartList[i].price;
-      }
+      state.cartList.forEach((item) => { sum += item.price; });
       return sum;
     },
   },

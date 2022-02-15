@@ -44,7 +44,7 @@
           w3-orange w3-xlarge w3-round-large w3-padding-small w3-text-white
         "
         data-test="footer-button"
-        @click="showModal(), postCartItem(item)"
+        @click="postCartItemWithModal"
       >
         🛒 <strong>{{ discountPrice }}</strong
         >원에 담기
@@ -52,10 +52,7 @@
     </footer>
 
     <transition name="modal">
-      <Modal
-        v-if="isModalShown"
-        @close="(isModalShown = false), this.$router.push('/cart')"
-      >
+      <Modal v-if="isModalShown" @close="closeModalWithRouter">
         <template v-slot:header>
           <h6>상품이 장바구니에 담겼습니다!</h6>
         </template>
@@ -143,8 +140,13 @@ export default {
     toggleLike() {
       this.item.seller.isLiked = !this.item.seller.isLiked;
     },
-    showModal() {
+    postCartItemWithModal() {
+      this.postCartItem(this.item);
       this.isModalShown = true;
+    },
+    closeModalWithRouter() {
+      this.isModalShown = false;
+      this.$router.push('/cart');
     },
   },
 
