@@ -50,9 +50,6 @@ export default {
     discountPrice() {
       return this.discount_price.toLocaleString();
     },
-    originalPrice() {
-      return this.original_price.toLocaleString();
-    },
   },
 };
 </script>
