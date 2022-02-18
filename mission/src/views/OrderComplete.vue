@@ -1,10 +1,11 @@
 <template>
-  <aside id="order-complete" data-test="order-wrapper">
+  <aside id="order-complete" data-test="complete-wrapper">
     <span>✅<br />주문이 완료되었습니다.</span>
 
-    <router-link to="/" data-test="order-router">
+    <router-link to="/" data-test="complete-router">
       <button
         class="w3-lightgray w3-large w3-round-large w3-border-0 w3-padding"
+        data-test="complete-button"
       >
         <strong>🏠 처음으로</strong>
       </button>

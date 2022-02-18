@@ -11,10 +11,10 @@
       :profile="item.image"
     />
 
-    <router-link to="/order">
+    <router-link to="/order" data-test="cart-router">
       <button
         class="w3-orange w3-xlarge w3-round-large w3-padding w3-text-white"
-        data-test="order-button"
+        data-test="cart-button"
       >
         <strong>🛍 구매하기</strong>
       </button>
