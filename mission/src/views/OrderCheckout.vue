@@ -22,42 +22,83 @@
     <Form @submit="onSubmit" data-test="checkout-form">
       <label>
         이름<br />
-        <Field type="text" name="username" :rules="validateText" />
+        <Field
+          type="text"
+          name="username"
+          v-model="orderInfo.username"
+          :rules="validateText"
+        />
         <br /><ErrorMessage name="username" />
       </label>
 
       <label>
         연락처<br />
-        <Field type="text" name="contact" :rules="validateContact" />
+        <Field
+          type="text"
+          name="contact"
+          v-model="orderInfo.contact"
+          :rules="validateContact"
+        />
         <br /><ErrorMessage name="contact" />
       </label>
 
       <label>
         배송지 주소<br />
-        <Field type="text" name="address" :rules="validateText" />
+        <Field
+          type="text"
+          name="address"
+          v-model="orderInfo.address"
+          :rules="validateText"
+        />
         <br /><ErrorMessage name="address" />
       </label>
 
       <label>
         배송 방법<br />
-        <Field type="radio" name="shipping" value="package" />
+        <Field
+          type="radio"
+          name="shipping"
+          v-model="orderInfo.shipping"
+          value="package"
+        />
         <span>택배</span>
-        <Field type="radio" name="shipping" value="courier" />
+        <Field
+          type="radio"
+          name="shipping"
+          v-model="orderInfo.shipping"
+          value="courier"
+        />
         <span>퀵 배송</span>
       </label>
 
       <label>
         결제 방법<br />
-        <Field type="radio" name="payment" value="card" />
+        <Field
+          type="radio"
+          name="payment"
+          v-model="orderInfo.payment"
+          value="card"
+        />
         <span>신용/체크카드</span>
-        <Field type="radio" name="payment" value="cash" />
+        <Field
+          type="radio"
+          name="payment"
+          v-model="orderInfo.payment"
+          value="cash"
+        />
         <span>계좌이체</span>
       </label>
 
-      <router-link to="/order/complete" data-test="checkout-router">
+      <router-link
+        to="/order/complete"
+        data-test="checkout-router"
+        :disabled="!isFormCompleted"
+        :event="isFormCompleted ? 'click' : ''"
+      >
         <button
           class="w3-lightgray w3-large w3-round-large w3-border-0 w3-padding"
           data-test="checkout-button"
+          :disabled="!isFormCompleted"
           @click="deleteCartList"
         >
           <strong>💳 결제하기</strong>
@@ -82,9 +123,36 @@ export default {
     ErrorMessage,
   },
 
+  data() {
+    return {
+      orderInfo: {
+        username: '',
+        contact: '',
+        address: '',
+        shipping: '',
+        payment: '',
+      },
+    };
+  },
+
   computed: {
     ...mapState(['cartList']),
     ...mapGetters(['cartTotalPrice']),
+    isFormCompleted() {
+      /* eslint-disable object-curly-newline */
+      const { username, contact, address, shipping, payment } = this.orderInfo;
+      /* eslint-disable operator-linebreak */
+      if (
+        username.trim() !== '' &&
+        contact.match(/^\d{3}-\d{3,4}-\d{4}$/) &&
+        address.trim() !== '' &&
+        shipping !== '' &&
+        payment !== ''
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
 
   methods: {
@@ -214,6 +282,10 @@ export default {
 
         strong {
           font-weight: 600;
+        }
+
+        &:disabled {
+          cursor: default;
         }
       }
     }
