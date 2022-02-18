@@ -5,9 +5,11 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { createNamespacedHelpers } from 'vuex';
 import AppHeader from '@/components/App/Header.vue';
 import AppFooter from '@/components/App/Footer.vue';
+
+const { mapActions } = createNamespacedHelpers('cart');
 
 export default {
   name: 'App',

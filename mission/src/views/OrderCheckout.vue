@@ -66,8 +66,10 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { createNamespacedHelpers } from 'vuex';
 import { Field, Form, ErrorMessage } from 'vee-validate';
+
+const { mapState, mapGetters } = createNamespacedHelpers('cart');
 
 export default {
   name: 'OrderCheckoutPage',

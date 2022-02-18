@@ -66,12 +66,13 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { createNamespacedHelpers } from 'vuex';
 import ItemInfoShop from '@/components/ItemInfo/Shop.vue';
 import ItemInfoReview from '@/components/ItemInfo/Review.vue';
 import Modal from '@/components/Modal.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
+const { mapMutations } = createNamespacedHelpers('cart');
 const ItemRepository = Repository.get('item');
 
 export default {

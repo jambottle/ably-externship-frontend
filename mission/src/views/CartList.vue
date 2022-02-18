@@ -23,8 +23,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { createNamespacedHelpers } from 'vuex';
 import CartListCard from '@/components/CartList/Card.vue';
+
+const { mapState } = createNamespacedHelpers('cart');
 
 export default {
   name: 'CartListPage',
