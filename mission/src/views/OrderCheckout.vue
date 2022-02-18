@@ -1,5 +1,5 @@
 <template>
-  <main id="order-checkout" data-test="order-wrapper">
+  <main id="order-checkout" data-test="checkout-wrapper">
     <h3>🧾 주문/결제</h3>
 
     <h4>주문 목록</h4>
@@ -8,7 +8,7 @@
       <li
         v-for="item in cartList"
         :key="item.product_no"
-        data-test="order-item"
+        data-test="checkout-item"
       >
         ▸ {{ item.name }} / 1EA / {{ item.price.toLocaleString() }}원<br />
       </li>
@@ -19,7 +19,7 @@
 
     <h4>결제 정보</h4>
     <hr />
-    <Form @submit="onSubmit" data-test="order-form">
+    <Form @submit="onSubmit" data-test="checkout-form">
       <label>
         이름<br />
         <Field type="text" name="username" :rules="validateText" />
@@ -54,9 +54,11 @@
         <span>계좌이체</span>
       </label>
 
-      <router-link to="/order/complete" data-test="order-router">
+      <router-link to="/order/complete" data-test="checkout-router">
         <button
           class="w3-lightgray w3-large w3-round-large w3-border-0 w3-padding"
+          data-test="checkout-button"
+          @click="deleteCartList"
         >
           <strong>💳 결제하기</strong>
         </button>
@@ -69,7 +71,7 @@
 import { createNamespacedHelpers } from 'vuex';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 
-const { mapState, mapGetters } = createNamespacedHelpers('cart');
+const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('cart');
 
 export default {
   name: 'OrderCheckoutPage',
@@ -86,6 +88,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['deleteCartList']),
     onSubmit(values) {
       console.log(JSON.stringify(values, null, 2));
     },

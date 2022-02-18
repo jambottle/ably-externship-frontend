@@ -26,6 +26,9 @@ export default {
     postCartItem(state, payload) {
       state.cartList.push(payload);
     },
+    deleteCartList(state) {
+      state.cartList = [];
+    },
   },
 
   actions: {
