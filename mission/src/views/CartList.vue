@@ -1,5 +1,5 @@
 <template>
-  <main id="cart-list">
+  <main id="cart-list" v-if="cartList.length !== 0">
     <CartListCard
       v-for="item in cartList"
       :key="item.product_no"
@@ -20,6 +20,19 @@
       </button>
     </router-link>
   </main>
+
+  <aside id="cart-empty" v-else>
+    <span>😅<br />장바구니에 담긴 상품이 없습니다!</span>
+
+    <router-link to="/" data-test="cart-router">
+      <button
+        class="w3-lightgray w3-large w3-round-large w3-border-0 w3-padding"
+        data-test="cart-button"
+      >
+        <strong>🛍 쇼핑하러 가기</strong>
+      </button>
+    </router-link>
+  </aside>
 </template>
 
 <script>
@@ -67,6 +80,41 @@ export default {
 
       strong {
         font-weight: bold;
+      }
+    }
+  }
+}
+
+#cart-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  max-width: 512px;
+  margin: 0 auto 84px;
+  padding: 200px 0;
+
+  span {
+    font-size: 21px;
+    text-align: center;
+  }
+
+  a {
+    width: 100%;
+    max-width: 160px;
+    margin: 15px auto 0;
+    text-decoration: none;
+
+    button {
+      display: block;
+      margin: 8px auto;
+      border: 0;
+      box-shadow: 4px 4px lightgray;
+      cursor: pointer;
+
+      strong {
+        font-weight: 600;
       }
     }
   }
