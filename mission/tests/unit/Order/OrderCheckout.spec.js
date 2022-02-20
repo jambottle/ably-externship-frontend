@@ -29,8 +29,8 @@ describe('OrderCheckout.vue', () => {
       },
     });
 
-    expect(wrapper.get('[data-test="order-wrapper"]').exists()).toBe(true);
-    expect(wrapper.get('[data-test="order-router"] button').exists()).toBe(true);
+    expect(wrapper.get('[data-test="checkout-wrapper"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="checkout-router"] button').exists()).toBe(true);
   });
 
   it('routes to OrderCompletePage when linked button is clicked', async () => {
@@ -43,7 +43,7 @@ describe('OrderCheckout.vue', () => {
       },
     });
 
-    await container.get('[data-test="order-router"]').trigger('click');
+    await container.get('[data-test="checkout-router"]').trigger('click');
     await flushPromises();
 
     expect(container.findComponent(OrderCompletePage).exists()).toBe(true);

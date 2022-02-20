@@ -28,8 +28,8 @@ describe('OrderComplete.vue', () => {
       },
     });
 
-    expect(wrapper.get('[data-test="order-wrapper"]').exists()).toBe(true);
-    expect(wrapper.get('[data-test="order-router"] button').exists()).toBe(true);
+    expect(wrapper.get('[data-test="complete-wrapper"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="complete-router"] button').exists()).toBe(true);
   });
 
   it('routes to home page & renders ItemListPage when linked button is clicked', async () => {
@@ -42,7 +42,7 @@ describe('OrderComplete.vue', () => {
       },
     });
 
-    await container.get('[data-test="order-router"]').trigger('click');
+    await container.get('[data-test="complete-router"]').trigger('click');
     await flushPromises();
 
     expect(container.findComponent(ItemListPage).exists()).toBe(true);
