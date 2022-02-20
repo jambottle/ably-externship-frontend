@@ -5,12 +5,14 @@
     :class="hasScrolled ? 'hidden' : ''"
   >
     <router-link to="/" data-test="header-router">
-      <h1>DefJam Streetwear</h1>
+      <h1>{{ siteName }}</h1>
     </router-link>
   </header>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'AppHeader',
 
@@ -21,6 +23,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['siteName']),
     hasScrolled() {
       return this.scrollPosition !== 0;
     },

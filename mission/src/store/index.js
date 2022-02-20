@@ -1,8 +1,14 @@
 import { createStore } from 'vuex';
+import CartModule from '@/store/CartModule';
 
 export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  state() {
+    return {
+      siteName: 'DefJam Streetwear 🥾',
+    };
+  },
+
+  modules: {
+    cart: CartModule,
+  },
 });

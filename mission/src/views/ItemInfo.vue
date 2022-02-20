@@ -40,17 +40,19 @@
 
     <footer class="item-info-footer" data-test="footer-wrapper">
       <button
-        class="w3-round-large w3-black w3-xlarge w3-padding-small"
+        class="
+          w3-orange w3-xlarge w3-round-large w3-padding-small w3-text-white
+        "
         data-test="footer-button"
-        @click="showModal"
+        @click="postCartItemWithModal"
       >
-        <strong>{{ discountPrice }}</strong
-        >원 구매
+        🛒 <strong>{{ discountPrice }}</strong
+        >원에 담기
       </button>
     </footer>
 
     <transition name="modal">
-      <Modal v-if="isModalShown" @close="isModalShown = false">
+      <Modal v-if="isModalShown" @close="closeModalWithRouter">
         <template v-slot:header>
           <h6>상품이 장바구니에 담겼습니다!</h6>
         </template>
@@ -64,11 +66,13 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex';
 import ItemInfoShop from '@/components/ItemInfo/Shop.vue';
 import ItemInfoReview from '@/components/ItemInfo/Review.vue';
 import Modal from '@/components/Modal.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
+const { mapMutations } = createNamespacedHelpers('cart');
 const ItemRepository = Repository.get('item');
 
 export default {
@@ -120,6 +124,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['postCartItem']),
     async getItemInfo() {
       try {
         const { itemNo } = this.$route.params;
@@ -136,8 +141,13 @@ export default {
     toggleLike() {
       this.item.seller.isLiked = !this.item.seller.isLiked;
     },
-    showModal() {
+    postCartItemWithModal() {
+      this.postCartItem(this.item);
       this.isModalShown = true;
+    },
+    closeModalWithRouter() {
+      this.isModalShown = false;
+      this.$router.push('/cart');
     },
   },
 

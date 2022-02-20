@@ -5,8 +5,11 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex';
 import AppHeader from '@/components/App/Header.vue';
 import AppFooter from '@/components/App/Footer.vue';
+
+const { mapActions } = createNamespacedHelpers('cart');
 
 export default {
   name: 'App',
@@ -14,6 +17,14 @@ export default {
   components: {
     AppHeader,
     AppFooter,
+  },
+
+  methods: {
+    ...mapActions(['getCartList']),
+  },
+
+  created() {
+    this.getCartList();
   },
 };
 </script>
@@ -23,7 +34,7 @@ export default {
 @import './assets/scss/common.scss';
 
 #app {
-  width: 95%;
+  width: 97.5%;
   margin: 61px 0;
   padding-left: 15px;
 

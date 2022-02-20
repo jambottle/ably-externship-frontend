@@ -1,4 +1,4 @@
-import CartListPage from '../views/CartList.vue';
+import CartListPage from '@/views/CartList.vue';
 
 export default [
   {

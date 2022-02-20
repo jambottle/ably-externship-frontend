@@ -36,7 +36,7 @@ export default {
 
   methods: {
     setIconActive(url) {
-      return this.$route.path === url ? '#fd7e14' : 'inherit';
+      return this.$route.path === url ? 'orange' : 'inherit';
     },
   },
 };

@@ -2,8 +2,9 @@ import { mount, flushPromises } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import App from '@/App.vue';
-import AppHeader from '@/components/App/Header.vue';
+import OrderCompletePage from '@/views/OrderComplete.vue';
 import ItemListPage from '@/views/ItemList.vue';
+import OrderRoutes from '@/router/OrderRoutes';
 
 const routes = [
   {
@@ -11,6 +12,7 @@ const routes = [
     name: 'Home',
     component: ItemListPage,
   },
+  ...OrderRoutes,
 ];
 
 const router = createRouter({
@@ -18,20 +20,20 @@ const router = createRouter({
   routes,
 });
 
-describe('Header.vue', () => {
-  it('renders header element with linked title', () => {
-    const wrapper = mount(AppHeader, {
+describe('OrderComplete.vue', () => {
+  it('renders OrderCompletePage with linked button', () => {
+    const wrapper = mount(OrderCompletePage, {
       global: {
         plugins: [router],
       },
     });
 
-    expect(wrapper.get('[data-test="header-wrapper"]').exists()).toBe(true);
-    expect(wrapper.get('[data-test="header-router"] h1').exists()).toBe(true);
+    expect(wrapper.get('[data-test="complete-wrapper"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="complete-router"] button').exists()).toBe(true);
   });
 
-  it('routes to home page & renders ItemListPage when linked title is clicked', async () => {
-    router.push('/');
+  it('routes to home page & renders ItemListPage when linked button is clicked', async () => {
+    router.push('/order/complete');
     await router.isReady();
 
     const container = mount(App, {
@@ -40,7 +42,7 @@ describe('Header.vue', () => {
       },
     });
 
-    await container.get('[data-test="header-router"]').trigger('click');
+    await container.get('[data-test="complete-router"]').trigger('click');
     await flushPromises();
 
     expect(container.findComponent(ItemListPage).exists()).toBe(true);
